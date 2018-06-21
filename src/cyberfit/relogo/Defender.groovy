@@ -30,6 +30,15 @@ class Defender extends ReLogoTurtle{
 	
 	def step() {
 
+		
+		
+			def m = oneOf(terrains())
+			def i = createInteractionFFTo(m)
+			i.lifetime = 2
+			i.color = blue()
+		
+		
+		
 	}
 	
 }

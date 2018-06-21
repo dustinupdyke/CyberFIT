@@ -27,7 +27,14 @@ class Terrain extends ReLogoTurtle {
 	}
 	
 	def step() {
-		
+		if(team1Deploy == "M1") {
+			print "IS M1"
+		}
+		else {
+			print "NONONONO"
+		}
+			
+			
 	}
 	
 }

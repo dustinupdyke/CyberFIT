@@ -13,4 +13,7 @@ import repast.simphony.relogo.schedule.Setup
 
 class InteractionTT extends ReLogoLink {
 
+	//0 = die
+	def lifetime = 0
+	
 }

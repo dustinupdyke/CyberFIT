@@ -12,5 +12,8 @@ import repast.simphony.relogo.schedule.Go
 import repast.simphony.relogo.schedule.Setup
 
 class InteractionFT extends ReLogoLink {
+	
+	//0 = die
+	def lifetime = 0
 
 }

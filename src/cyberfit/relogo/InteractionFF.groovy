@@ -13,4 +13,22 @@ import repast.simphony.relogo.schedule.Setup
 
 class InteractionFF extends ReLogoLink {
 
+	//0 = die
+	def lifetime = 0
+		
+	@Setup
+	def setup(){
+		
+	
+	}
+		
+	def step(){
+		if(lifetime == 0) {
+			die()
+		}
+		else {
+			lifetime--
+		}
+					
+	}
 }

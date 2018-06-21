@@ -6,5 +6,8 @@
     <projection id="UndirectedLinks" type="network"/>
     <projection id="Tracking Network" type="network" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
     <projection id="UserLink" type="network"/>
+    <projection id="InteractionFF" type="network"/>
+    <projection id="InteractionFT" type="network" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <projection id="InteractionTT" type="network"/>
   </context>
 </context>

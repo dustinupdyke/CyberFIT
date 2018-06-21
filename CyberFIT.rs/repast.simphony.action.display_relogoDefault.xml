@@ -46,6 +46,18 @@
       <string>UserLink</string>
       <string>cyberfit.style.LinkStyle</string>
     </entry>
+    <entry>
+      <string>InteractionFF</string>
+      <string>cyberfit.style.LinkStyle</string>
+    </entry>
+    <entry>
+      <string>InteractionFT</string>
+      <string>cyberfit.style.LinkStyle</string>
+    </entry>
+    <entry>
+      <string>InteractionTT</string>
+      <string>cyberfit.style.LinkStyle</string>
+    </entry>
   </netStyles>
   <editedNetStyles>
     <entry>
@@ -62,6 +74,18 @@
     </entry>
     <entry>
       <string>UserLink</string>
+      <null/>
+    </entry>
+    <entry>
+      <string>InteractionFF</string>
+      <null/>
+    </entry>
+    <entry>
+      <string>InteractionFT</string>
+      <null/>
+    </entry>
+    <entry>
+      <string>InteractionTT</string>
       <null/>
     </entry>
   </editedNetStyles>
@@ -113,6 +137,21 @@
     </repast.simphony.scenario.data.ProjectionData>
     <repast.simphony.scenario.data.ProjectionData>
       <id>UserLink</id>
+      <attributes/>
+      <type>NETWORK</type>
+    </repast.simphony.scenario.data.ProjectionData>
+    <repast.simphony.scenario.data.ProjectionData>
+      <id>InteractionFF</id>
+      <attributes/>
+      <type>NETWORK</type>
+    </repast.simphony.scenario.data.ProjectionData>
+    <repast.simphony.scenario.data.ProjectionData>
+      <id>InteractionFT</id>
+      <attributes/>
+      <type>NETWORK</type>
+    </repast.simphony.scenario.data.ProjectionData>
+    <repast.simphony.scenario.data.ProjectionData>
+      <id>InteractionTT</id>
       <attributes/>
       <type>NETWORK</type>
     </repast.simphony.scenario.data.ProjectionData>
@@ -172,6 +211,27 @@
       <string>UserLink</string>
       <repast.simphony.visualization.engine.DefaultProjectionDescriptor>
         <proj reference="../../../../projections/repast.simphony.scenario.data.ProjectionData[5]"/>
+        <props/>
+      </repast.simphony.visualization.engine.DefaultProjectionDescriptor>
+    </entry>
+    <entry>
+      <string>InteractionFF</string>
+      <repast.simphony.visualization.engine.DefaultProjectionDescriptor>
+        <proj reference="../../../../projections/repast.simphony.scenario.data.ProjectionData[6]"/>
+        <props/>
+      </repast.simphony.visualization.engine.DefaultProjectionDescriptor>
+    </entry>
+    <entry>
+      <string>InteractionFT</string>
+      <repast.simphony.visualization.engine.DefaultProjectionDescriptor>
+        <proj reference="../../../../projections/repast.simphony.scenario.data.ProjectionData[7]"/>
+        <props/>
+      </repast.simphony.visualization.engine.DefaultProjectionDescriptor>
+    </entry>
+    <entry>
+      <string>InteractionTT</string>
+      <repast.simphony.visualization.engine.DefaultProjectionDescriptor>
+        <proj reference="../../../../projections/repast.simphony.scenario.data.ProjectionData[8]"/>
         <props/>
       </repast.simphony.visualization.engine.DefaultProjectionDescriptor>
     </entry>

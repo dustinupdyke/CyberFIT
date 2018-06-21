@@ -11,30 +11,16 @@ import cyberfit.ReLogoObserver;
 
 class UserObserver extends ReLogoObserver{
 
-	/**
-	 * Add observer methods here. For example:
-
-		@Setup
-		def setup(){
-			clearAll()
-			createTurtles(10){
-				forward(random(10))
-			}
-		}
-		
-	 *
-	 * or
-	 * 	
+	@Setup
+	def setup(){
+		clearAll()
+		print "setup"
+	}
 	
-		@Go
-		def go(){
-			ask(turtles()){
-				left(random(90))
-				right(random(90))
-				forward(random(10))
-			}
+	@Go
+	def go(){
+		print "go"
 		}
-
-	 */
-
 }
+
+	

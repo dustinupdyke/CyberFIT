@@ -12,5 +12,16 @@ import repast.simphony.relogo.schedule.Go
 import repast.simphony.relogo.schedule.Setup
 
 class Attacker extends ReLogoTurtle {
+	
+	def tier = 1 // 1 - 6 based on DSB
+	def phase = 0 //1-7
+	def attacks = [] //array of Attacks
+	
+	def setup(){
+		
+	}
 
+	def step() {
+	
+	}
 }

@@ -18,8 +18,10 @@ class UserObserver extends ReLogoObserver{
 		clearAll()
 		
 		setDefaultShape(Terrain,"box")
-		loadBaseTerrain()
+		setDefaultShape(Defender,"person")
 		
+		loadBaseTerrain()
+		assignCPTs()
 //		loadMissions()
 	}
 	
@@ -62,12 +64,36 @@ class UserObserver extends ReLogoObserver{
 	}
 	
 	def loadBaseTerrain(){
-		createTerrains(5){ [setxy(0,-200), setColor(brown())] }
 		
-		createDefenders(5){ [setxy(0,200), setColor(green())] }
+		//Create Routers (type 1)
+		createTerrains(1){ [setxy(0,0), setColor(brown()), type = 1] }
+		createTerrains(1){ [setxy(1,0), setColor(brown()), type = 1] }
+		createTerrains(1){ [setxy(2,0), setColor(brown()), type = 1] }
+		createTerrains(1){ [setxy(3,0), setColor(brown()), type = 1] }
+				
+		//Create Servers (type 2)
+		createTerrains(1){ [setxy(-10,-100), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(-8,-100), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(-6,-100), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(-4,-100), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(-2,-100), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(0,-100), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(2,-100), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(4,-100), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(6,-100), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(8,-100), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(10,-100), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(12, -100), setColor(brown()), type = 2] }
 		
-		
-		
+		//Create Clients (type 3)
+	}
+	
+	def assignCPTs() {
+	
+		createDefenders(1){ [setxy(0,200), setColor(green())] }
+		createDefenders(1){ [setxy(1,200), setColor(green())] }
+		createDefenders(1){ [setxy(2,200), setColor(green())] }
+		createDefenders(1){ [setxy(3,200), setColor(green())] }
 	}
 }
 

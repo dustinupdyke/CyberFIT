@@ -13,8 +13,10 @@ class UserObserver extends ReLogoObserver{
 
 	@Setup
 	def setup(){
-		print "setup"
 		
+		// initialize Random.uniform
+		Random random = new Random()
+				
 		clearAll()
 		
 		setDefaultShape(Terrain,"box")

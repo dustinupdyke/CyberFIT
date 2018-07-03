@@ -28,9 +28,6 @@ class Terrain extends ReLogoTurtle {
 	
 	def step() {
 	
-		status = random.nextInt(10)
-		
-		print status
 		
 		//generateVuls()			
 			

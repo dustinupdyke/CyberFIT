@@ -31,6 +31,5 @@ public class UserGlobalsAndPanelFactory extends AbstractReLogoGlobalsAndPanelFac
 	        addStateChangeButtonWL("changeSomething","Change Something")
 	        
 		 */
-
 	}
 }

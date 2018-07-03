@@ -19,10 +19,13 @@ class UserObserver extends ReLogoObserver{
 		
 		setDefaultShape(Terrain,"box")
 		setDefaultShape(Defender,"person")
+		setDefaultShape(Attacker,"person")
 		
 		loadBaseTerrain()
 		assignCPTs()
 //		loadMissions()
+		
+		loadAttackers()
 	}
 	
 	@Go
@@ -94,6 +97,12 @@ class UserObserver extends ReLogoObserver{
 		createDefenders(1){ [setxy(1,200), setColor(green())] }
 		createDefenders(1){ [setxy(2,200), setColor(green())] }
 		createDefenders(1){ [setxy(3,200), setColor(green())] }
+	}
+	
+	def loadAttackers() {
+		createAttackers(1){ [setxy(0,-400), setColor(red())] }
+		createAttackers(1){ [setxy(2,-400), setColor(red())] }
+		createAttackers(1){ [setxy(4,-400), setColor(red())] }
 	}
 }
 

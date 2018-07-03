@@ -11,5 +11,6 @@ import repast.simphony.relogo.schedule.Setup;
 import cyberfit.ReLogoTurtle;
 
 class UserTurtle extends ReLogoTurtle{
-
+	
+	def random = new Random()
 }

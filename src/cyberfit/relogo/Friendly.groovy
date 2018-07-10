@@ -22,6 +22,10 @@ class Friendly extends ReLogoTurtle {
 	}
 	
 	def step() {
+		/*every tick a Friendly might:
+		 * interact with terrain (InteractionFT)
+		 * do nothing 
+		 * */
 		
 	}
 	

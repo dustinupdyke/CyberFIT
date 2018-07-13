@@ -24,6 +24,7 @@ class InteractionFF extends ReLogoLink {
 		
 	def step(){
 		if(lifetime == 0) {
+			print "dead"
 			die()
 		}
 		else {

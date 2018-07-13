@@ -34,6 +34,7 @@ class Attacker extends UserTurtle {
 
 	def step() {
 		
+		print phase
 	   switch (phase) {
 	    case 0:
 		//case 0 means the attacker hasn't started, get random and if 50% or better, begin attack, this gives some random delay to starting	

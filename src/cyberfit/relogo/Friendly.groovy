@@ -12,7 +12,7 @@ import repast.simphony.relogo.schedule.Go
 import repast.simphony.relogo.schedule.Setup
 
 
-class Friendly extends ReLogoTurtle {
+class Friendly extends UserTurtle {
 
 	def type = "log" //mission type of friendly agent assigned
 	def missionId = 0 //mission ID of friendly agent

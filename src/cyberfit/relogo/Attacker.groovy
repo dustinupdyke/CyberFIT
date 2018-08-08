@@ -33,8 +33,6 @@ class Attacker extends UserTurtle {
 	}
 
 	def step() {
-		
-		print phase
 	   switch (phase) {
 	    case 0:
 		//case 0 means the attacker hasn't started, get random and if 50% or better, begin attack, this gives some random delay to starting	
@@ -42,28 +40,32 @@ class Attacker extends UserTurtle {
 			if(random.nextInt(100) > 50) {
 				//proceed to phase 1
 				phase = 1
+				phasetime = random.nextInt(100)
 			}
 			
-		break
+			break
 		case 1:
 		/*this is recon phase
 		 * every step, the attacker might create an interaction between their attacker machine and one of the terrain type 1 or 2
 		 * the phase should run, on average, 80 ticks
 		 * wait for at least 20 ticks before proceeding
 		 * */
-			phasetime = random.nextInt(100)
+			if(phasetime < 1) {
+				phase = 2
+				phasetime = random.nextInt(100)
+			}
 		
-			phase = 2
-			print phasetime
-		//here
-		
-		break
+			break
 		case 2:
 		/*this is weaponization phase, attacker will only connect to own attacker machine, as it is being prepped for delivery
 		 * phase should run on average 60 ticks
 		 * wait for at least 20 ticks before proceeding
 		 * */
-		break
+			if(phasetime < 1) {
+				phase = 3
+				phasetime = random.nextInt(100)
+			}
+			break
 		case 3:
 		/*this is delivery phase
 		 * attacker machine will target terrain by type (based on attack type) and create interaction, if that terrain has vul id of one of attacker 
@@ -71,8 +73,11 @@ class Attacker extends UserTurtle {
 		 * phase should run average of 30 ticks
 		 * wait for at least 5 ticks before proceeding
 		 * */
-		
-		break
+			if(phasetime < 1) {
+				phase = 4
+				phasetime = random.nextInt(100)
+			}
+			break
 		case 4:
 		/*this is exploitation phase, where the attack must work
 		 * we already know that the attack matched the vulnerability during the delivery phase, but that specific vul might have been mitigated 
@@ -82,25 +87,39 @@ class Attacker extends UserTurtle {
 		 * set one or more of CIA to 0 and set isCompromised to true (on the terrain turtle)
 		 * 
 		 * */
-		break
+			if(phasetime < 1) {
+				phase = 5
+				phasetime = random.nextInt(100)
+			}
+			break
 		case 5:
 		/*this is command and control phase where compromised terrain phones home or to malicious server, 
 		 * create InteractionTT with the attacker machine
 		 * phase should run average of 20 ticks
 		 */
-		break
+			if(phasetime < 1) {
+				phase = 6
+				phasetime = random.nextInt(100)
+			}
+			break
 		case 6:
 		/*this is actions on objectives phase
 		 * depending on attack type, the exploited machine will make InteractionTT with some other machines, for now, just
 		 * make random InteractionTT with other terrain, and set the lifespan of those IntaractionTTs to random value
-		 * phase shold run average of 85 ticks 
+		 * phase should run average of 85 ticks 
 		 * */
-		break
+			if(phasetime < 1) {
+				phase = 0
+				phasetime = 0
+			}
+			break
 	   }
 	   
-	   if(phasetime > 0)
+	   if(phasetime > -1)
 		   phasetime = phasetime - 1
+		   
+		  
 	   
-	   print phasetime
+	   print "phase: " + phase + " | phasetime: " + phasetime
 	}
 }

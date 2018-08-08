@@ -317,7 +317,7 @@ class UserObserver extends ReLogoObserver{
 			}
 	
 	def loadAttackers() {
-		//createAttackers(1){ [setxy(0,-400), setColor(red()), tier = 1] }
+		createAttackers(1){ [setxy(0,-400), setColor(red()), tier = 1] }
 		//createAttackers(1){ [setxy(2,-400), setColor(red()), tier = 2] }
 		//createAttackers(1){ [setxy(4,-400), setColor(red()), tier = 3] }
 	}

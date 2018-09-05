@@ -1174,6 +1174,27 @@ public class ReLogoObserver extends BaseObserver{
 	}
 
 	/**
+	 * Returns the value of the global variable CPTsReady.
+	 *
+	 * @return the value of the global variable CPTsReady
+	 */
+	@ReLogoBuilderGeneratedFor("global: CPTsReady")
+	public Object getCPTsReady(){
+		return repast.simphony.relogo.ReLogoModel.getInstance().getModelParam("CPTsReady");
+	}
+
+	/**
+	 * Sets the value of the global variable CPTsReady.
+	 *
+	 * @param value
+	 *            a value
+	 */
+	@ReLogoBuilderGeneratedFor("global: CPTsReady")
+	public void setCPTsReady(Object value){
+		repast.simphony.relogo.ReLogoModel.getInstance().setModelParam("CPTsReady",value);
+	}
+
+	/**
 	 * Returns the value of the global variable team1Deploy.
 	 *
 	 * @return the value of the global variable team1Deploy

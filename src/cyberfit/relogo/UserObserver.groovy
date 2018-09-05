@@ -33,7 +33,8 @@ class UserObserver extends ReLogoObserver{
 	@Go
 	def go(){
 	
-		print "start step *******************"
+		checkCPTsAssigned()
+		if(CPTsReady == 1) {
 		ask(interactionFTs()) {
 			step()
 		}
@@ -63,7 +64,21 @@ class UserObserver extends ReLogoObserver{
 		ask(friendlys()) {
 			step()
 		}
+		}
 		
+	}
+	
+	def checkCPTsAssigned() {
+		
+		if(team1Deploy == 'N' || team2Deploy == 'N' || team3Deploy == 'N' || team4Deploy == 'N') {
+			CPTsReady = 0
+		}
+		else {
+			CPTsReady = 1
+		}
+	}
+	
+	def loadMissions() {
 		
 	}
 	
@@ -317,7 +332,7 @@ class UserObserver extends ReLogoObserver{
 			}
 	
 	def loadAttackers() {
-		//createAttackers(1){ [setxy(0,-400), setColor(red()), tier = 1] }
+		createAttackers(1){ [setxy(0,-400), setColor(red()), tier = 1] }
 		//createAttackers(1){ [setxy(2,-400), setColor(red()), tier = 2] }
 		//createAttackers(1){ [setxy(4,-400), setColor(red()), tier = 3] }
 	}

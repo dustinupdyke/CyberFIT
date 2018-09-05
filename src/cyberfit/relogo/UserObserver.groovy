@@ -91,20 +91,26 @@ class UserObserver extends ReLogoObserver{
 		createTerrains(1){ [setxy(3,0), setColor(brown()), type = 1] }
 				
 		//Create Servers (type 2)
-		createTerrains(1){ [setxy(-10,-100), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-8,-100), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-6,-100), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-4,-100), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-2,-100), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(0,-100), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(2,-100), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(4,-100), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(6,-100), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(8,-100), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(10,-100), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(12, -100), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(-10,-50), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(-8,-50), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(-6,-50), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(-4,-50), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(-2,-50), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(0,-50), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(2,-50), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(4,-50), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(6,-50), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(8,-50), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(10,-50), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(12,-50), setColor(brown()), type = 2] }
 		
 		//Create Clients (type 3)
+		
+		//create attacker workstations
+		createTerrains(100){ [setxy(12,-75), setColor(pink()), type = 66] }
+		
+		//create defender workstations
+		createTerrains(1){ [setxy(12,50), setColor(lime()), type = 99] }
 	}
 	
 	def assignCPTs() {
@@ -332,7 +338,7 @@ class UserObserver extends ReLogoObserver{
 			}
 	
 	def loadAttackers() {
-		createAttackers(1){ [setxy(0,-400), setColor(red()), tier = 1] }
+		createAttackers(1){ [setxy(12,-78), setColor(red()), tier = 1] }
 		//createAttackers(1){ [setxy(2,-400), setColor(red()), tier = 2] }
 		//createAttackers(1){ [setxy(4,-400), setColor(red()), tier = 3] }
 	}

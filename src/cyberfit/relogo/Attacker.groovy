@@ -54,7 +54,24 @@ class Attacker extends UserTurtle {
 				phase = 2
 				phasetime = random.nextInt(100)
 			}
-		
+			
+			if(random.nextInt(100) > 50) {
+				print "Recon connection"
+				
+				def reconLength = random.nextInt(100)
+				
+				//get on an attacker workstation
+				def attackerWorkstation = oneOf(terrains().with({type.equals(66)})) //connect me to a machine
+				def attackerWorkstationLink = createInteractionFTTo(attackerWorkstation)
+				attackerWorkstationLink.lifetime = reconLength
+				attackerWorkstationLink.color = pink()
+				
+				//now connect from that workstation out to a target machine in the battlespace
+				def attackerTargetLink = attackerWorkstation.createInteractionTTTo(oneOf(terrains().with({type.equals(1) || type.equals(2) || type.equals(3)})))
+				attackerTargetLink.lifetime = reconLength
+				attackerTargetLink.color = pink()
+			}
+			
 			break
 		case 2:
 		/*this is weaponization phase, attacker will only connect to own attacker machine, as it is being prepped for delivery

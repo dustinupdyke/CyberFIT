@@ -26,22 +26,30 @@ class Defender extends UserTurtle{
 	
 	def step() {
 
-		/*every step, a defender might:
-		 * interact with another defender (create InteractionFF)
-		 * interact with a terrain (create InteractionFT)
-		 * do nothing
-		 * */
-		
-		
 		def iChance = random.nextInt(100)
-		if(iChance > 90) {
-			def m = oneOf(defenders().with({team.equals(2)}))
+		
+		// every step, a defender might:
+		// a. do nothing
+				
+		// b. interact with another defender (create InteractionFF)		
+		if(iChance > 89) {
+			def m = oneOf(defenders().with({team.equals(1)}))
 			def i = createInteractionFFTo(m)
-			i.lifetime = random.nextInt(4)
-			i.color = blue()
+			i.lifetime = random.nextInt(100)
+			i.color = cyan()
+			m.setColor(cyan())
 		}
 		
-
+		// c.interact with a terrain (create InteractionFT)
+		if(iChance < 11) {
+			def d = oneOf(defenders().with({team.equals(1)}))
+			def workstation = oneOf(terrains().with({type.equals(99)})) //connect me to a machine
+			def workstationLink = d.createInteractionFTTo(workstation)
+			workstation.setColor(blue())
+			d.setColor(blue())
+			
+			workstationLink.lifetime = random.nextInt(4)
+			workstationLink.color = blue()
+		}
 	}
-	
 }

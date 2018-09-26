@@ -24,15 +24,23 @@ class UserObserver extends ReLogoObserver{
 		setDefaultShape(Attacker,"person")
 		
 		loadBaseTerrain()
-		assignCPTs()
-//		loadMissions()
-		
+		loadCPTs()		
 		loadAttackers()
+		loadMissions()
+		print "missions loaded"
+		assignCPTs()
 	}
 	
 	@Go
 	def go(){
 	
+		//if(MissionsReady == 0) {
+			//loadMissions()
+			//MissionsReady = 1
+		//}
+		
+			
+			
 		checkCPTsAssigned()
 		if(CPTsReady == 1) {
 		ask(interactionFTs()) {
@@ -66,6 +74,9 @@ class UserObserver extends ReLogoObserver{
 		}
 		}
 		
+		//if(ticks % 2592000 == 0) {
+			//MissionsReady = 0
+		//}
 	}
 	
 	def checkCPTsAssigned() {
@@ -80,6 +91,13 @@ class UserObserver extends ReLogoObserver{
 	
 	def loadMissions() {
 		
+		Campaign c1 = new Campaign()
+		c1.loadMissions()
+
+	}
+	
+	def assignCPTs() {
+		def xu = 1
 	}
 	
 	def loadBaseTerrain(){
@@ -89,7 +107,19 @@ class UserObserver extends ReLogoObserver{
 		createTerrains(1){ [setxy(1,0), setColor(brown()), type = 1] }
 		createTerrains(1){ [setxy(2,0), setColor(brown()), type = 1] }
 		createTerrains(1){ [setxy(3,0), setColor(brown()), type = 1] }
+		
+		//Create Routers (type 1)
+		createTerrains(1){ [setxy(6,0), setColor(brown()), type = 1] }
+		createTerrains(1){ [setxy(8,0), setColor(brown()), type = 1] }
+		createTerrains(1){ [setxy(10,0), setColor(brown()), type = 1] }
+		createTerrains(1){ [setxy(12,0), setColor(brown()), type = 1] }
 				
+		//Create Routers (type 1)
+		createTerrains(1){ [setxy(6,-10), setColor(brown()), type = 1] }
+		createTerrains(1){ [setxy(8,-10), setColor(brown()), type = 1] }
+		createTerrains(1){ [setxy(10,-10), setColor(brown()), type = 1] }
+		createTerrains(1){ [setxy(12,-10), setColor(brown()), type = 1] }
+		
 		//Create Servers (type 2)
 		createTerrains(1){ [setxy(-10,-100), setColor(brown()), type = 2] }
 		createTerrains(1){ [setxy(-8,-100), setColor(brown()), type = 2] }
@@ -107,29 +137,55 @@ class UserObserver extends ReLogoObserver{
 		//Create Clients (type 3)
 	}
 	
-	def assignCPTs() {
+	def loadCPTs() {
+		
+		Campaign c2 = new Campaign()
+		c2.loadCPTs()
+		
+		/*
+		createDefenders(1){ [setxy(-100,100), setColor(green()), team = 1, rank = "O3", experienceMissions = 4, experienceTraining = 50] }
+		createDefenders(1){ [setxy(-99,90), setColor(green()), team = 1, rank = "O2", experienceMissions = 1, experienceTraining = 45] }
+		createDefenders(1){ [setxy(-98,80), setColor(green()), team = 1, rank = "O2", experienceMissions = 3, experienceTraining = 15] }
+		createDefenders(1){ [setxy(-97,0), setColor(green()), team = 1, rank = "w4", experienceMissions = 16, experienceTraining = 90] }
+		createDefenders(1){ [setxy(-96,-40), setColor(green()), team = 1, rank = "w2", experienceMissions = 10, experienceTraining = 72] }
+		createDefenders(1){ [setxy(-95,-80), setColor(green()), team = 1, rank = "e8", experienceMissions = 25, experienceTraining = 60] }
+		createDefenders(1){ [setxy(-94,-100), setColor(green()), team = 1, rank = "e7", experienceMissions = 14, experienceTraining = 80] }
+		createDefenders(1){ [setxy(-93,100), setColor(green()), team = 1, rank = "e6", experienceMissions = 10, experienceTraining = 42] }
+		createDefenders(1){ [setxy(-92,100), setColor(green()), team = 1, rank = "e6", experienceMissions = 12, experienceTraining = 68] }
+		createDefenders(1){ [setxy(-91,100), setColor(green()), team = 1, rank = "e6", experienceMissions = 6, experienceTraining = 22] }
+		createDefenders(1){ [setxy(-90,100), setColor(green()), team = 1, rank = "e5", experienceMissions = 4, experienceTraining = 90] }
+		createDefenders(1){ [setxy(-89,100), setColor(green()), team = 1, rank = "e5", experienceMissions = 12, experienceTraining = 72] }
+		createDefenders(1){ [setxy(-88,100), setColor(green()), team = 1, rank = "e4", experienceMissions = 9, experienceTraining = 82] }
+		createDefenders(1){ [setxy(-87,100), setColor(green()), team = 1, rank = "e4", experienceMissions = 4, experienceTraining = 32] }
+		createDefenders(1){ [setxy(-86,100), setColor(green()), team = 1, rank = "e4", experienceMissions = 13, experienceTraining = 82] }
+		createDefenders(1){ [setxy(-85,100), setColor(green()), team = 1, rank = "e4", experienceMissions = 1, experienceTraining = 8] }
+		createDefenders(1){ [setxy(-84,100), setColor(green()), team = 1, rank = "e3", experienceMissions = 9, experienceTraining = 52] }
+		createDefenders(1){ [setxy(-83,100), setColor(green()), team = 1, rank = "e3", experienceMissions = 6, experienceTraining = 42] }
+		createDefenders(1){ [setxy(-82,100), setColor(green()), team = 1, rank = "e3", experienceMissions = 4, experienceTraining = 55] }
+		createDefenders(1){ [setxy(-81,100), setColor(green()), team = 1, rank = "e3", experienceMissions = 1, experienceTraining = 13] }
+		
 		
 		//Add CPT 1 to world
-		createDefenders(1){ [setxy(-1500,1500), setColor(green()), team = 1, rank = "O3", experienceMissions = 4, experienceTraining = 50] }
-		createDefenders(1){ [setxy(-1499,1500), setColor(green()), team = 1, rank = "O2", experienceMissions = 1, experienceTraining = 45] }
-		createDefenders(1){ [setxy(-1498,1500), setColor(green()), team = 1, rank = "O2", experienceMissions = 3, experienceTraining = 15] }
-		createDefenders(1){ [setxy(-1497,1500), setColor(green()), team = 1, rank = "w4", experienceMissions = 16, experienceTraining = 90] }
-		createDefenders(1){ [setxy(-1496,1500), setColor(green()), team = 1, rank = "w2", experienceMissions = 10, experienceTraining = 72] }
-		createDefenders(1){ [setxy(-1495,1500), setColor(green()), team = 1, rank = "e8", experienceMissions = 25, experienceTraining = 60] }
-		createDefenders(1){ [setxy(-1494,1500), setColor(green()), team = 1, rank = "e7", experienceMissions = 14, experienceTraining = 80] }
-		createDefenders(1){ [setxy(-1493,1500), setColor(green()), team = 1, rank = "e6", experienceMissions = 10, experienceTraining = 42] }
-		createDefenders(1){ [setxy(-1492,1500), setColor(green()), team = 1, rank = "e6", experienceMissions = 12, experienceTraining = 68] }
-		createDefenders(1){ [setxy(-1491,1500), setColor(green()), team = 1, rank = "e6", experienceMissions = 6, experienceTraining = 22] }
-		createDefenders(1){ [setxy(-1490,1500), setColor(green()), team = 1, rank = "e5", experienceMissions = 4, experienceTraining = 90] }
-		createDefenders(1){ [setxy(-1489,1500), setColor(green()), team = 1, rank = "e5", experienceMissions = 12, experienceTraining = 72] }
-		createDefenders(1){ [setxy(-1488,1500), setColor(green()), team = 1, rank = "e4", experienceMissions = 9, experienceTraining = 82] }
-		createDefenders(1){ [setxy(-1487,1500), setColor(green()), team = 1, rank = "e4", experienceMissions = 4, experienceTraining = 32] }
-		createDefenders(1){ [setxy(-1486,1500), setColor(green()), team = 1, rank = "e4", experienceMissions = 13, experienceTraining = 82] }
-		createDefenders(1){ [setxy(-1485,1500), setColor(green()), team = 1, rank = "e4", experienceMissions = 1, experienceTraining = 8] }
-		createDefenders(1){ [setxy(-1484,1500), setColor(green()), team = 1, rank = "e3", experienceMissions = 9, experienceTraining = 52] }
-		createDefenders(1){ [setxy(-1483,1500), setColor(green()), team = 1, rank = "e3", experienceMissions = 6, experienceTraining = 42] }
-		createDefenders(1){ [setxy(-1482,1500), setColor(green()), team = 1, rank = "e3", experienceMissions = 4, experienceTraining = 55] }
-		createDefenders(1){ [setxy(-1481,1500), setColor(green()), team = 1, rank = "e3", experienceMissions = 1, experienceTraining = 13] }
+		createDefenders(1){ [setxy(-1500,1400), setColor(green()), team = 1, rank = "O3", experienceMissions = 4, experienceTraining = 50] }
+		createDefenders(1){ [setxy(-1499,1400), setColor(green()), team = 1, rank = "O2", experienceMissions = 1, experienceTraining = 45] }
+		createDefenders(1){ [setxy(-1498,1400), setColor(green()), team = 1, rank = "O2", experienceMissions = 3, experienceTraining = 15] }
+		createDefenders(1){ [setxy(-1497,1400), setColor(green()), team = 1, rank = "w4", experienceMissions = 16, experienceTraining = 90] }
+		createDefenders(1){ [setxy(-1496,1400), setColor(green()), team = 1, rank = "w2", experienceMissions = 10, experienceTraining = 72] }
+		createDefenders(1){ [setxy(-1495,1400), setColor(green()), team = 1, rank = "e8", experienceMissions = 25, experienceTraining = 60] }
+		createDefenders(1){ [setxy(-1494,1400), setColor(green()), team = 1, rank = "e7", experienceMissions = 14, experienceTraining = 80] }
+		createDefenders(1){ [setxy(-1493,1400), setColor(green()), team = 1, rank = "e6", experienceMissions = 10, experienceTraining = 42] }
+		createDefenders(1){ [setxy(-1492,1400), setColor(green()), team = 1, rank = "e6", experienceMissions = 12, experienceTraining = 68] }
+		createDefenders(1){ [setxy(-1491,1400), setColor(green()), team = 1, rank = "e6", experienceMissions = 6, experienceTraining = 22] }
+		createDefenders(1){ [setxy(-1490,1400), setColor(green()), team = 1, rank = "e5", experienceMissions = 4, experienceTraining = 90] }
+		createDefenders(1){ [setxy(-1489,1400), setColor(green()), team = 1, rank = "e5", experienceMissions = 12, experienceTraining = 72] }
+		createDefenders(1){ [setxy(-1488,1400), setColor(green()), team = 1, rank = "e4", experienceMissions = 9, experienceTraining = 82] }
+		createDefenders(1){ [setxy(-1487,1400), setColor(green()), team = 1, rank = "e4", experienceMissions = 4, experienceTraining = 32] }
+		createDefenders(1){ [setxy(-1486,1400), setColor(green()), team = 1, rank = "e4", experienceMissions = 13, experienceTraining = 82] }
+		createDefenders(1){ [setxy(-1485,1400), setColor(green()), team = 1, rank = "e4", experienceMissions = 1, experienceTraining = 8] }
+		createDefenders(1){ [setxy(-1484,1400), setColor(green()), team = 1, rank = "e3", experienceMissions = 9, experienceTraining = 52] }
+		createDefenders(1){ [setxy(-1483,1400), setColor(green()), team = 1, rank = "e3", experienceMissions = 6, experienceTraining = 42] }
+		createDefenders(1){ [setxy(-1482,1400), setColor(green()), team = 1, rank = "e3", experienceMissions = 4, experienceTraining = 55] }
+		createDefenders(1){ [setxy(-1481,1400), setColor(green()), team = 1, rank = "e3", experienceMissions = 1, experienceTraining = 13] }
 		
 		
 		//Add CPT 2 to world -1500, 1499
@@ -329,6 +385,8 @@ class UserObserver extends ReLogoObserver{
 		createDefenders(1){ [setxy(-1483,1491), setColor(green()), team = 10, rank = "e3", experienceMissions = 5, experienceTraining = 42] }
 		createDefenders(1){ [setxy(-1482,1491), setColor(green()), team = 10, rank = "e3", experienceMissions = 3, experienceTraining = 53] }
 		createDefenders(1){ [setxy(-1481,1491), setColor(green()), team = 10, rank = "e3", experienceMissions = 1, experienceTraining = 12] }
+			*/
+		
 			}
 	
 	def loadAttackers() {

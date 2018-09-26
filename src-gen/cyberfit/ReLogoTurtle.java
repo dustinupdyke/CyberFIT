@@ -2364,6 +2364,27 @@ public class ReLogoTurtle extends BaseTurtle{
 	}
 
 	/**
+	 * Returns the value of the global variable MissionsReady.
+	 *
+	 * @return the value of the global variable MissionsReady
+	 */
+	@ReLogoBuilderGeneratedFor("global: MissionsReady")
+	public Object getMissionsReady(){
+		return repast.simphony.relogo.ReLogoModel.getInstance().getModelParam("MissionsReady");
+	}
+
+	/**
+	 * Sets the value of the global variable MissionsReady.
+	 *
+	 * @param value
+	 *            a value
+	 */
+	@ReLogoBuilderGeneratedFor("global: MissionsReady")
+	public void setMissionsReady(Object value){
+		repast.simphony.relogo.ReLogoModel.getInstance().setModelParam("MissionsReady",value);
+	}
+
+	/**
 	 * Returns the value of the global variable team1Deploy.
 	 *
 	 * @return the value of the global variable team1Deploy

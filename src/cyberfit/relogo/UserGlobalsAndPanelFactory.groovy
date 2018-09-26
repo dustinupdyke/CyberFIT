@@ -6,6 +6,7 @@ public class UserGlobalsAndPanelFactory extends AbstractReLogoGlobalsAndPanelFac
 	public void addGlobalsAndPanelComponents(){
 		
 		addGlobal("CPTsReady", 0)
+		addGlobal("MissionsReady", 0)
 		
 		addChooserWL("team1Deploy", "CPT 1 Deployment", ["N","T","M1","M2","M3","M4","M5","M6","M7","M8","M9"], 0)
 		addChooserWL("team2Deploy", "CPT 2 Deployment", ["N","T","M1","M2","M3","M4","M5","M6","M7","M8","M9"], 0)

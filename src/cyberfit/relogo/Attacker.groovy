@@ -28,6 +28,7 @@ class Attacker extends UserTurtle {
 	def phase = 0 // 1-7 identifying which phase of kill chain agent is in
 	def phasetime = 0	
 	def attacks = [] //array of attacks available to the agent
+	def isPhaseSwitch = false
 	
 	def setup(){	
 	}
@@ -40,6 +41,7 @@ class Attacker extends UserTurtle {
 			if(random.nextInt(100) > 50) {
 				//proceed to phase 1
 				phase = 1
+				isPhaseSwitch = true
 				phasetime = random.nextInt(100)
 			}
 			
@@ -52,36 +54,53 @@ class Attacker extends UserTurtle {
 		 * */
 			if(phasetime < 1) {
 				phase = 2
+				isPhaseSwitch = true
 				phasetime = random.nextInt(100)
 			}
 			
 			if(random.nextInt(100) > 50) {
 				print "Recon connection"
 				
-				def reconLength = random.nextInt(100)
-				
 				//get on an attacker workstation
 				def attackerWorkstation = oneOf(terrains().with({type.equals(66)})) //connect me to a machine
 				def attackerWorkstationLink = createInteractionFTTo(attackerWorkstation)
-				attackerWorkstationLink.lifetime = reconLength
-				attackerWorkstationLink.color = pink()
+				attackerWorkstationLink.lifetime = phasetime
+				attackerWorkstationLink.color = gray()
+				attackerWorkstation.setColor(gray())
 				
 				//now connect from that workstation out to a target machine in the battlespace
 				def attackerTargetLink = attackerWorkstation.createInteractionTTTo(oneOf(terrains().with({type.equals(1) || type.equals(2) || type.equals(3)})))
-				attackerTargetLink.lifetime = reconLength
-				attackerTargetLink.color = pink()
+				attackerTargetLink.lifetime = phasetime
+				attackerTargetLink.color = gray()
+				
+				this.setColor(gray())
 			}
-			
+			isPhaseSwitch = false
 			break
 		case 2:
-		/*this is weaponization phase, attacker will only connect to own attacker machine, as it is being prepped for delivery
+		/*this is the weaponization phase, attacker will only connect to own attacker machine, as it is being prepped for delivery
 		 * phase should run on average 60 ticks
 		 * wait for at least 20 ticks before proceeding
 		 * */
 			if(phasetime < 1) {
 				phase = 3
+				isPhaseSwitch = true
 				phasetime = random.nextInt(100)
 			}
+			if(isPhaseSwitch) {
+				print "Weaponizing"
+				
+				def attackerWorkstation = oneOf(terrains().with({type.equals(66)})) //connect me to a machine
+				attackerWorkstation.setColor(pink())
+				
+				def attackerWorkstationLink = createInteractionFTTo(attackerWorkstation)
+				attackerWorkstationLink.lifetime = phasetime
+				attackerWorkstationLink.color = pink()
+				
+				this.setColor(pink())
+			}
+			
+			isPhaseSwitch = false
 			break
 		case 3:
 		/*this is delivery phase
@@ -92,8 +111,31 @@ class Attacker extends UserTurtle {
 		 * */
 			if(phasetime < 1) {
 				phase = 4
+				isPhaseSwitch = true
 				phasetime = random.nextInt(100)
 			}
+			
+			if(isPhaseSwitch) {
+				print "Delivering payload..."
+				
+				def attackerWorkstation = oneOf(terrains().with({type.equals(66)})) //connect me to a machine
+				attackerWorkstation.setColor(magenta())
+				
+				def attackerWorkstationLink = createInteractionFTTo(attackerWorkstation)
+				attackerWorkstationLink.lifetime = phasetime
+				attackerWorkstationLink.color = magenta()
+				
+				//now connect from that workstation out to a target machine in the battlespace
+				def attackedMachine = oneOf(terrains().with({type.equals(1) || type.equals(2) || type.equals(3)}))
+				attackedMachine.setColor(magenta())
+				def attackerTargetLink = attackerWorkstation.createInteractionTTTo(attackedMachine)
+				attackerTargetLink.lifetime = phasetime
+				attackerTargetLink.color = magenta()
+				
+				this.setColor(magenta())
+			}
+			
+			isPhaseSwitch = false
 			break
 		case 4:
 		/*this is exploitation phase, where the attack must work
@@ -108,6 +150,8 @@ class Attacker extends UserTurtle {
 				phase = 5
 				phasetime = random.nextInt(100)
 			}
+			
+			isPhaseSwitch = false
 			break
 		case 5:
 		/*this is command and control phase where compromised terrain phones home or to malicious server, 
@@ -118,6 +162,8 @@ class Attacker extends UserTurtle {
 				phase = 6
 				phasetime = random.nextInt(100)
 			}
+			
+			isPhaseSwitch = false
 			break
 		case 6:
 		/*this is actions on objectives phase
@@ -129,6 +175,8 @@ class Attacker extends UserTurtle {
 				phase = 0
 				phasetime = 0
 			}
+			
+			isPhaseSwitch = false
 			break
 	   }
 	   

@@ -2,6 +2,15 @@ package cyberfit.relogo
 
 import static repast.simphony.relogo.Utility.*;
 import static repast.simphony.relogo.UtilityG.*;
+
+import java.io.File
+import jxl.*
+
+import org.apache.poi.ss.usermodel.DataFormatter
+import org.apache.poi.ss.usermodel.Sheet
+import org.apache.poi.ss.usermodel.Workbook
+import org.apache.poi.ss.usermodel.WorkbookFactory
+
 import repast.simphony.relogo.Stop;
 import repast.simphony.relogo.Utility;
 import repast.simphony.relogo.UtilityG;
@@ -11,6 +20,9 @@ import cyberfit.ReLogoObserver;
 
 class UserObserver extends ReLogoObserver{
 
+	public static final String MPATH = "./docs/campaign_01_missions.xlsx";
+	public static final String CPATH = "./docs/campaign_01_CPTs.xlsx";
+	
 	@Setup
 	def setup(){
 		
@@ -27,7 +39,7 @@ class UserObserver extends ReLogoObserver{
 		loadCPTs()		
 		loadAttackers()
 		loadMissions()
-		print "missions loaded"
+		//print "missions loaded"
 		assignCPTs()
 	}
 	
@@ -145,8 +157,14 @@ class UserObserver extends ReLogoObserver{
 	
 	def loadCPTs() {
 		
-		Campaign c2 = new Campaign()
-		c2.loadCPTs()
+		ExcelBuilder e = new ExcelBuilder("C:\\Users\\gdobson\\Documents\\GitHub\\cyberfit\\docs\\campaign_01_CPTs.xlsx")
+		//def s = e.getSheet(1)
+		  
+		  //C:\Users\gdobson\Documents\GitHub\cyberfit\docs
+		  
+		//def sheet=wb.getSheet("Sheet1")
+		//r=sheet.getRows()
+		//def r 
 		
 		/*
 		createDefenders(1){ [setxy(-100,100), setColor(green()), team = 1, rank = "O3", experienceMissions = 4, experienceTraining = 50] }

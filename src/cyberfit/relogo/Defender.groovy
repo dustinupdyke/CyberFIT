@@ -20,6 +20,9 @@ class Defender extends UserTurtle{
 	def csa = [0,0] //Cyber Situational Awareness 2d graph array terrainid|confidentiality|integrity|availability
 	def opStatus = 0 //0 = available, 1 = on training, 2 = on mission
 	
+	def Defender() {
+	}
+	
 	def setup() {
 		
 	}

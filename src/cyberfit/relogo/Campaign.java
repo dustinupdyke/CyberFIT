@@ -1,5 +1,6 @@
 package cyberfit.relogo;
-
+import static repast.simphony.relogo.Utility.*;
+import static repast.simphony.relogo.UtilityG.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,6 +16,7 @@ public class Campaign {
 
 	public static final String MPATH = "./docs/campaign_01_missions.xlsx";
 	public static final String CPATH = "./docs/campaign_01_CPTs.xlsx";
+	private int i;
 	
 	public boolean loadMissions() throws Exception, IOException {
 		
@@ -28,10 +30,10 @@ public class Campaign {
 		sheet.forEach(row -> {
             row.forEach(cell -> {
                 String cellValue = dataFormatter.formatCellValue(cell);
-                System.out.print(cellValue + "\t");
+                //System.out.print(cellValue + "\t");
                 
             });
-            System.out.println();
+            //System.out.println();
         });
 
         // Closing the workbook
@@ -56,10 +58,15 @@ public class Campaign {
             row.forEach(cell -> {
                 String cellValue = dataFormatter.formatCellValue(cell);
                 forceAgentDetails[cell.getColumnIndex()] = cellValue;
+                System.out.print(cell.getColumnIndex() + "\t");
                 System.out.print(cellValue + "\t");
             });
+            Defender d = new Defender();
+            //d.setTeam(forceAgentDetails[1]);
             //createDefenders(1){ [setxy(-100,rowPosition), setColor(green()), team = 1, rank = "O3", experienceMissions = 4, experienceTraining = 50] };
+            //createDefenders(1);
             //rowNum++;
+          System.out.println();
         });
 
         // Closing the workbook

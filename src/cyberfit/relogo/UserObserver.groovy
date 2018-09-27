@@ -157,7 +157,7 @@ class UserObserver extends ReLogoObserver{
 	
 	def loadCPTs() {
 		
-		ExcelBuilder e = new ExcelBuilder("C:\\Users\\gdobson\\Documents\\GitHub\\cyberfit\\docs\\campaign_01_CPTs.xlsx")
+		//ExcelBuilder e = new ExcelBuilder("C:\\Users\\gdobson\\Documents\\GitHub\\cyberfit\\docs\\campaign_01_CPTs.xlsx")
 		//def s = e.getSheet(1)
 		  
 		  //C:\Users\gdobson\Documents\GitHub\cyberfit\docs
@@ -166,11 +166,12 @@ class UserObserver extends ReLogoObserver{
 		//r=sheet.getRows()
 		//def r 
 		
-		/*
+		
 		createDefenders(1){ [setxy(-100,100), setColor(green()), team = 1, rank = "O3", experienceMissions = 4, experienceTraining = 50] }
 		createDefenders(1){ [setxy(-99,90), setColor(green()), team = 1, rank = "O2", experienceMissions = 1, experienceTraining = 45] }
 		createDefenders(1){ [setxy(-98,80), setColor(green()), team = 1, rank = "O2", experienceMissions = 3, experienceTraining = 15] }
 		createDefenders(1){ [setxy(-97,0), setColor(green()), team = 1, rank = "w4", experienceMissions = 16, experienceTraining = 90] }
+		/*
 		createDefenders(1){ [setxy(-96,-40), setColor(green()), team = 1, rank = "w2", experienceMissions = 10, experienceTraining = 72] }
 		createDefenders(1){ [setxy(-95,-80), setColor(green()), team = 1, rank = "e8", experienceMissions = 25, experienceTraining = 60] }
 		createDefenders(1){ [setxy(-94,-100), setColor(green()), team = 1, rank = "e7", experienceMissions = 14, experienceTraining = 80] }

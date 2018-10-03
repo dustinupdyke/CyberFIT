@@ -56,11 +56,10 @@ class UserObserver extends ReLogoObserver{
 		loadCPTs()		
 		loadAttackers()
 		loadMissions()
-<<<<<<< HEAD
 		
-=======
+
 		//print "missions loaded"
->>>>>>> 7320620ed464df515eeeedf714c561638172b83e
+
 		assignCPTs()
 	}
 	

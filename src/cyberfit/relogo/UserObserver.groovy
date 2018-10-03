@@ -2,6 +2,15 @@ package cyberfit.relogo
 
 import static repast.simphony.relogo.Utility.*;
 import static repast.simphony.relogo.UtilityG.*;
+
+import java.io.File
+import jxl.*
+
+import org.apache.poi.ss.usermodel.DataFormatter
+import org.apache.poi.ss.usermodel.Sheet
+import org.apache.poi.ss.usermodel.Workbook
+import org.apache.poi.ss.usermodel.WorkbookFactory
+
 import repast.simphony.relogo.Stop;
 import repast.simphony.relogo.Utility;
 import repast.simphony.relogo.UtilityG;
@@ -11,6 +20,9 @@ import cyberfit.ReLogoObserver;
 
 class UserObserver extends ReLogoObserver{
 
+	public static final String MPATH = "./docs/campaign_01_missions.xlsx";
+	public static final String CPATH = "./docs/campaign_01_CPTs.xlsx";
+	
 	@Setup
 	def setup(){
 		
@@ -44,7 +56,11 @@ class UserObserver extends ReLogoObserver{
 		loadCPTs()		
 		loadAttackers()
 		loadMissions()
+<<<<<<< HEAD
 		
+=======
+		//print "missions loaded"
+>>>>>>> 7320620ed464df515eeeedf714c561638172b83e
 		assignCPTs()
 	}
 	
@@ -108,8 +124,8 @@ class UserObserver extends ReLogoObserver{
 	
 	def loadMissions() {
 		
-		//Campaign c1 = new Campaign()
-		//c1.loadMissions()
+		Campaign c1 = new Campaign()
+		c1.loadMissions()
 
 	}
 	
@@ -178,6 +194,14 @@ class UserObserver extends ReLogoObserver{
 	
 	def loadCPTs() {
 		
+		//ExcelBuilder e = new ExcelBuilder("C:\\Users\\gdobson\\Documents\\GitHub\\cyberfit\\docs\\campaign_01_CPTs.xlsx")
+		//def s = e.getSheet(1)
+		  
+		  //C:\Users\gdobson\Documents\GitHub\cyberfit\docs
+		  
+		//def sheet=wb.getSheet("Sheet1")
+		//r=sheet.getRows()
+		//def r 
 		//Campaign c2 = new Campaign()
 		//c2.loadCPTs()
 		
@@ -188,11 +212,11 @@ class UserObserver extends ReLogoObserver{
 		createDefenders(1){ [setxy(-40,20), setColor(green()), team = 1, rank = "w2", experienceMissions = 10, experienceTraining = 72] }
 		
 		
-		/*
 		createDefenders(1){ [setxy(-100,100), setColor(green()), team = 1, rank = "O3", experienceMissions = 4, experienceTraining = 50] }
 		createDefenders(1){ [setxy(-99,90), setColor(green()), team = 1, rank = "O2", experienceMissions = 1, experienceTraining = 45] }
 		createDefenders(1){ [setxy(-98,80), setColor(green()), team = 1, rank = "O2", experienceMissions = 3, experienceTraining = 15] }
 		createDefenders(1){ [setxy(-97,0), setColor(green()), team = 1, rank = "w4", experienceMissions = 16, experienceTraining = 90] }
+		/*
 		createDefenders(1){ [setxy(-96,-40), setColor(green()), team = 1, rank = "w2", experienceMissions = 10, experienceTraining = 72] }
 		createDefenders(1){ [setxy(-95,-80), setColor(green()), team = 1, rank = "e8", experienceMissions = 25, experienceTraining = 60] }
 		createDefenders(1){ [setxy(-94,-100), setColor(green()), team = 1, rank = "e7", experienceMissions = 14, experienceTraining = 80] }

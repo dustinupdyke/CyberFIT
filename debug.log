@@ -253,7 +253,11 @@ Caused by: java.lang.NumberFormatException: For input string: "25s"
 	at repast.simphony.scenario.ScenarioLoader.load(ScenarioLoader.java:168)
 	... 22 more
 >>>>>>> 0b82bf2d6ed9dd5347a15768b7964cf9f7bd1da2
+<<<<<<< HEAD
 FATAL [Thread-6] 2018-10-03 09:32:35,393 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+=======
+FATAL [Thread-7] 2018-09-26 13:55:07,774 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+>>>>>>> 7320620ed464df515eeeedf714c561638172b83e
 Current tick (0.0)
 java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
@@ -263,12 +267,17 @@ java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
 	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
 	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+<<<<<<< HEAD
 	at java.lang.Thread.run(Thread.java:745)
+=======
+	at java.lang.Thread.run(Unknown Source)
+>>>>>>> 7320620ed464df515eeeedf714c561638172b83e
 Caused by: java.lang.reflect.InvocationTargetException
 	at cyberfit.relogo.UserObserver$$FastClassByCGLIB$$3a39e39b.invoke(<generated>)
 	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
 	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
 	... 7 more
+<<<<<<< HEAD
 Caused by: groovy.lang.MissingPropertyException: No such property: c1 for class: cyberfit.relogo.UserObserver
 	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.unwrap(ScriptBytecodeAdapter.java:53)
 	at org.codehaus.groovy.vmplugin.v7.IndyGuardsFiltersAndSignatures.unwrap(IndyGuardsFiltersAndSignatures.java:177)
@@ -276,6 +285,16 @@ Caused by: groovy.lang.MissingPropertyException: No such property: c1 for class:
 	at cyberfit.relogo.UserObserver.setup(UserObserver.groovy:24)
 	... 10 more
 FATAL [Thread-6] 2018-10-03 09:46:25,457 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+=======
+Caused by: groovy.lang.MissingMethodException: No signature of method: static org.apache.poi.ss.usermodel.Workbook.getWorkbook() is applicable for argument types: (File) values: [C:\Users\gdobson\Documents\GitHub\cyberfit\docs\Campaign_01_CPTs.xlsx]
+	at groovy.lang.MetaClassImpl.invokeStaticMissingMethod(MetaClassImpl.java:1512)
+	at groovy.lang.MetaClassImpl.invokeStaticMethod(MetaClassImpl.java:1498)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.loadCPTs(UserObserver.groovy:163)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.setup(UserObserver.groovy:39)
+	... 10 more
+FATAL [Thread-7] 2018-09-26 14:19:46,558 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
 Current tick (0.0)
 java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
@@ -285,12 +304,199 @@ java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
 	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
 	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Thread.java:745)
+	at java.lang.Thread.run(Unknown Source)
 Caused by: java.lang.reflect.InvocationTargetException
 	at cyberfit.relogo.UserObserver$$FastClassByCGLIB$$3a39e39b.invoke(<generated>)
 	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
 	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
 	... 7 more
+Caused by: groovy.lang.MissingMethodException: No signature of method: static org.apache.poi.ss.usermodel.Workbook.getWorkbook() is applicable for argument types: (File) values: [C:\Users\gdobson\Documents\GitHub\cyberfit\docs\Campaign_01_CPTs.xlsx]
+	at groovy.lang.MetaClassImpl.invokeStaticMissingMethod(MetaClassImpl.java:1512)
+	at groovy.lang.MetaClassImpl.invokeStaticMethod(MetaClassImpl.java:1498)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.loadCPTs(UserObserver.groovy:163)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.setup(UserObserver.groovy:39)
+	... 10 more
+FATAL [Thread-7] 2018-09-26 14:23:46,910 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (0.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at cyberfit.relogo.UserObserver$$FastClassByCGLIB$$3a39e39b.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: groovy.lang.MissingMethodException: No signature of method: static org.apache.poi.ss.usermodel.Workbook.getWorkbook() is applicable for argument types: (File) values: [C:\Users\gdobson\Documents\GitHub\cyberfit\docs\Campaign_01_CPTs.xlsx]
+	at groovy.lang.MetaClassImpl.invokeStaticMissingMethod(MetaClassImpl.java:1512)
+	at groovy.lang.MetaClassImpl.invokeStaticMethod(MetaClassImpl.java:1498)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.loadCPTs(UserObserver.groovy:163)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.setup(UserObserver.groovy:39)
+	... 10 more
+FATAL [Thread-7] 2018-09-26 14:47:23,523 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (0.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at cyberfit.relogo.UserObserver$$FastClassByCGLIB$$3a39e39b.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: groovy.lang.MissingPropertyException: No such property: numCPTs for class: cyberfit.relogo.UserObserver
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.unwrap(ScriptBytecodeAdapter.java:53)
+	at org.codehaus.groovy.vmplugin.v7.IndyGuardsFiltersAndSignatures.unwrap(IndyGuardsFiltersAndSignatures.java:177)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.loadCPTs(UserObserver.groovy:163)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.setup(UserObserver.groovy:39)
+	... 10 more
+ERROR [AWT-EventQueue-0] 2018-09-26 14:48:00,536 repast.simphony.ui.RSApplication - Error while initializing simulation
+groovy.lang.GroovyRuntimeException: Could not find matching constructor for: repast.simphony.relogo.factories.RLWorldDimensions(Integer, Integer, Integer, Integer, Integer)
+	at groovy.lang.MetaClassImpl.invokeConstructor(MetaClassImpl.java:1743)
+	at groovy.lang.MetaClassImpl.invokeConstructor(MetaClassImpl.java:1543)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.context.SimBuilder.build(SimBuilder.groovy:39)
+	at repast.simphony.dataLoader.engine.ClassNameContextBuilder.build(ClassNameContextBuilder.java:41)
+	at repast.simphony.dataLoader.engine.DataLoaderControllerAction.runInitialize(DataLoaderControllerAction.java:48)
+	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
+	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
+	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:292)
+	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
+	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
+	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:288)
+	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
+	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
+	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:157)
+	at repast.simphony.ui.action.InitRun.actionPerformed(InitRun.java:17)
+	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
+	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
+	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
+	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
+	at java.awt.Component.processMouseEvent(Unknown Source)
+	at javax.swing.JComponent.processMouseEvent(Unknown Source)
+	at java.awt.Component.processEvent(Unknown Source)
+	at java.awt.Container.processEvent(Unknown Source)
+	at java.awt.Component.dispatchEventImpl(Unknown Source)
+	at java.awt.Container.dispatchEventImpl(Unknown Source)
+	at java.awt.Component.dispatchEvent(Unknown Source)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
+	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
+	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
+	at java.awt.Container.dispatchEventImpl(Unknown Source)
+	at java.awt.Window.dispatchEventImpl(Unknown Source)
+	at java.awt.Component.dispatchEvent(Unknown Source)
+	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
+	at java.awt.EventQueue.access$500(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)
+	at java.awt.EventQueue$4.run(Unknown Source)
+	at java.awt.EventQueue$4.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)
+	at java.awt.EventQueue.dispatchEvent(Unknown Source)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.run(Unknown Source)
+ERROR [AWT-EventQueue-0] 2018-09-26 14:48:24,991 repast.simphony.ui.RSApplication - Error while initializing simulation
+groovy.lang.GroovyRuntimeException: Could not find matching constructor for: repast.simphony.relogo.factories.RLWorldDimensions(Integer, Integer, Integer, Integer, Integer)
+	at groovy.lang.MetaClassImpl.invokeConstructor(MetaClassImpl.java:1743)
+	at groovy.lang.MetaClassImpl.invokeConstructor(MetaClassImpl.java:1543)
+	at cyberfit.context.SimBuilder.build(SimBuilder.groovy:39)
+	at repast.simphony.dataLoader.engine.ClassNameContextBuilder.build(ClassNameContextBuilder.java:41)
+	at repast.simphony.dataLoader.engine.DataLoaderControllerAction.runInitialize(DataLoaderControllerAction.java:48)
+	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
+	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
+	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:292)
+	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
+	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
+	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:288)
+	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
+	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
+	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:157)
+	at repast.simphony.ui.action.InitRun.actionPerformed(InitRun.java:17)
+	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
+	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
+	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
+	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
+	at java.awt.Component.processMouseEvent(Unknown Source)
+	at javax.swing.JComponent.processMouseEvent(Unknown Source)
+	at java.awt.Component.processEvent(Unknown Source)
+	at java.awt.Container.processEvent(Unknown Source)
+	at java.awt.Component.dispatchEventImpl(Unknown Source)
+	at java.awt.Container.dispatchEventImpl(Unknown Source)
+	at java.awt.Component.dispatchEvent(Unknown Source)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
+	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
+	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
+	at java.awt.Container.dispatchEventImpl(Unknown Source)
+	at java.awt.Window.dispatchEventImpl(Unknown Source)
+	at java.awt.Component.dispatchEvent(Unknown Source)
+	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
+	at java.awt.EventQueue.access$500(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)
+	at java.awt.EventQueue$4.run(Unknown Source)
+	at java.awt.EventQueue$4.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)
+	at java.awt.EventQueue.dispatchEvent(Unknown Source)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.run(Unknown Source)
+FATAL [Thread-7] 2018-09-26 14:56:32,556 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+>>>>>>> 7320620ed464df515eeeedf714c561638172b83e
+Current tick (0.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+<<<<<<< HEAD
+	at java.lang.Thread.run(Thread.java:745)
+=======
+	at java.lang.Thread.run(Unknown Source)
+>>>>>>> 7320620ed464df515eeeedf714c561638172b83e
+Caused by: java.lang.reflect.InvocationTargetException
+	at cyberfit.relogo.UserObserver$$FastClassByCGLIB$$3a39e39b.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+<<<<<<< HEAD
 Caused by: groovy.lang.MissingPropertyException: No such property: item for class: cyberfit.relogo.UserObserver
 	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.unwrap(ScriptBytecodeAdapter.java:53)
 	at org.codehaus.groovy.vmplugin.v7.IndyGuardsFiltersAndSignatures.unwrap(IndyGuardsFiltersAndSignatures.java:177)
@@ -298,6 +504,17 @@ Caused by: groovy.lang.MissingPropertyException: No such property: item for clas
 	at cyberfit.relogo.UserObserver.setup(UserObserver.groovy:28)
 	... 10 more
 FATAL [Thread-6] 2018-10-03 09:49:25,230 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+=======
+Caused by: groovy.lang.MissingPropertyException: No such property: numCPTs for class: cyberfit.relogo.UserObserver
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.unwrap(ScriptBytecodeAdapter.java:53)
+	at org.codehaus.groovy.vmplugin.v7.IndyGuardsFiltersAndSignatures.unwrap(IndyGuardsFiltersAndSignatures.java:177)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.loadCPTs(UserObserver.groovy:163)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.setup(UserObserver.groovy:39)
+	... 10 more
+FATAL [Thread-7] 2018-09-26 15:01:11,180 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+>>>>>>> 7320620ed464df515eeeedf714c561638172b83e
 Current tick (0.0)
 java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
@@ -307,12 +524,17 @@ java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
 	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
 	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+<<<<<<< HEAD
 	at java.lang.Thread.run(Thread.java:745)
+=======
+	at java.lang.Thread.run(Unknown Source)
+>>>>>>> 7320620ed464df515eeeedf714c561638172b83e
 Caused by: java.lang.reflect.InvocationTargetException
 	at cyberfit.relogo.UserObserver$$FastClassByCGLIB$$3a39e39b.invoke(<generated>)
 	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
 	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
 	... 7 more
+<<<<<<< HEAD
 Caused by: groovy.lang.MissingPropertyException: No such property: team for class: cyberfit.relogo.UserObserver
 	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.unwrap(ScriptBytecodeAdapter.java:53)
 	at org.codehaus.groovy.vmplugin.v7.IndyGuardsFiltersAndSignatures.unwrap(IndyGuardsFiltersAndSignatures.java:177)
@@ -322,12 +544,81 @@ Caused by: groovy.lang.MissingPropertyException: No such property: team for clas
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.lang.reflect.Method.invoke(Method.java:498)
+=======
+Caused by: groovy.lang.MissingPropertyException: No such property: numCPTs for class: cyberfit.relogo.UserObserver
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.unwrap(ScriptBytecodeAdapter.java:53)
+	at org.codehaus.groovy.vmplugin.v7.IndyGuardsFiltersAndSignatures.unwrap(IndyGuardsFiltersAndSignatures.java:177)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.loadCPTs(UserObserver.groovy:163)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.setup(UserObserver.groovy:39)
+	... 10 more
+FATAL [Thread-7] 2018-09-26 15:14:23,455 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (0.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at cyberfit.relogo.UserObserver$$FastClassByCGLIB$$3a39e39b.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.io.FileNotFoundException: Campaign_01_CPTs.xls (The system cannot find the file specified)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(Unknown Source)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at org.codehaus.groovy.runtime.ResourceGroovyMethods.newInputStream(ResourceGroovyMethods.java:2149)
+	at org.codehaus.groovy.runtime.ResourceGroovyMethods.withInputStream(ResourceGroovyMethods.java:1853)
+	at org.codehaus.groovy.runtime.dgm$1051.doMethodInvoke(Unknown Source)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.ExcelBuilder.<init>(ExcelBuilder.groovy:46)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.loadCPTs(UserObserver.groovy:160)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.setup(UserObserver.groovy:39)
+	... 10 more
+FATAL [Thread-7] 2018-09-26 15:20:49,709 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (0.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at cyberfit.relogo.UserObserver$$FastClassByCGLIB$$3a39e39b.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: org.apache.poi.poifs.filesystem.OfficeXmlFileException: The supplied data appears to be in the Office 2007+ XML. You are calling the part of POI that deals with OLE2 Office Documents. You need to call a different part of POI to process this data (eg XSSF instead of HSSF)
+	at org.apache.poi.poifs.storage.HeaderBlock.<init>(HeaderBlock.java:131)
+	at org.apache.poi.poifs.storage.HeaderBlock.<init>(HeaderBlock.java:104)
+	at org.apache.poi.poifs.filesystem.POIFSFileSystem.<init>(POIFSFileSystem.java:138)
+	at org.apache.poi.hssf.usermodel.HSSFWorkbook.<init>(HSSFWorkbook.java:322)
+	at org.apache.poi.hssf.usermodel.HSSFWorkbook.<init>(HSSFWorkbook.java:303)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.ExcelBuilder$_closure2.doCall(ExcelBuilder.groovy:47)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+>>>>>>> 7320620ed464df515eeeedf714c561638172b83e
 	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:98)
 	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:325)
 	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:294)
 	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1033)
 	at groovy.lang.Closure.call(Closure.java:415)
 	at groovy.lang.Closure.call(Closure.java:431)
+<<<<<<< HEAD
 	at org.codehaus.groovy.runtime.DefaultGroovyMethods.each(DefaultGroovyMethods.java:2187)
 	at org.codehaus.groovy.runtime.DefaultGroovyMethods.each(DefaultGroovyMethods.java:2172)
 	at org.codehaus.groovy.runtime.DefaultGroovyMethods.each(DefaultGroovyMethods.java:2213)
@@ -336,6 +627,19 @@ Caused by: groovy.lang.MissingPropertyException: No such property: team for clas
 	at cyberfit.relogo.UserObserver.setup(UserObserver.groovy:28)
 	... 10 more
 FATAL [Thread-6] 2018-10-03 09:52:55,324 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+=======
+	at org.codehaus.groovy.runtime.IOGroovyMethods.withStream(IOGroovyMethods.java:1183)
+	at org.codehaus.groovy.runtime.ResourceGroovyMethods.withInputStream(ResourceGroovyMethods.java:1853)
+	at org.codehaus.groovy.runtime.dgm$1051.doMethodInvoke(Unknown Source)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.ExcelBuilder.<init>(ExcelBuilder.groovy:46)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.loadCPTs(UserObserver.groovy:160)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.setup(UserObserver.groovy:39)
+	... 10 more
+FATAL [Thread-7] 2018-09-26 15:28:26,091 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+>>>>>>> 7320620ed464df515eeeedf714c561638172b83e
 Current tick (0.0)
 java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
@@ -345,12 +649,17 @@ java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
 	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
 	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+<<<<<<< HEAD
 	at java.lang.Thread.run(Thread.java:745)
+=======
+	at java.lang.Thread.run(Unknown Source)
+>>>>>>> 7320620ed464df515eeeedf714c561638172b83e
 Caused by: java.lang.reflect.InvocationTargetException
 	at cyberfit.relogo.UserObserver$$FastClassByCGLIB$$3a39e39b.invoke(<generated>)
 	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
 	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
 	... 7 more
+<<<<<<< HEAD
 Caused by: groovy.lang.MissingMethodException: No signature of method: java.io.PrintStream.printLn() is applicable for argument types: (String) values: [1]
 Possible solutions: println(java.lang.String), println(), println(), println([C), println(boolean), println(char)
 	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.unwrap(ScriptBytecodeAdapter.java:58)
@@ -359,6 +668,36 @@ Possible solutions: println(java.lang.String), println(), println(), println([C)
 	at cyberfit.relogo.UserObserver.setup(UserObserver.groovy:30)
 	... 10 more
 FATAL [Thread-6] 2018-10-03 10:06:00,711 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+=======
+Caused by: org.apache.poi.poifs.filesystem.OfficeXmlFileException: The supplied data appears to be in the Office 2007+ XML. You are calling the part of POI that deals with OLE2 Office Documents. You need to call a different part of POI to process this data (eg XSSF instead of HSSF)
+	at org.apache.poi.poifs.storage.HeaderBlock.<init>(HeaderBlock.java:131)
+	at org.apache.poi.poifs.storage.HeaderBlock.<init>(HeaderBlock.java:104)
+	at org.apache.poi.poifs.filesystem.POIFSFileSystem.<init>(POIFSFileSystem.java:138)
+	at org.apache.poi.hssf.usermodel.HSSFWorkbook.<init>(HSSFWorkbook.java:322)
+	at org.apache.poi.hssf.usermodel.HSSFWorkbook.<init>(HSSFWorkbook.java:303)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.ExcelBuilder$_closure2.doCall(ExcelBuilder.groovy:47)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:98)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:325)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:294)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1033)
+	at groovy.lang.Closure.call(Closure.java:415)
+	at groovy.lang.Closure.call(Closure.java:431)
+	at org.codehaus.groovy.runtime.IOGroovyMethods.withStream(IOGroovyMethods.java:1183)
+	at org.codehaus.groovy.runtime.ResourceGroovyMethods.withInputStream(ResourceGroovyMethods.java:1853)
+	at org.codehaus.groovy.runtime.dgm$1051.doMethodInvoke(Unknown Source)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.ExcelBuilder.<init>(ExcelBuilder.groovy:46)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.loadCPTs(UserObserver.groovy:160)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.setup(UserObserver.groovy:39)
+	... 10 more
+FATAL [Thread-7] 2018-09-26 15:31:00,816 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
 Current tick (0.0)
 java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
@@ -368,16 +707,139 @@ java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
 	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
 	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Thread.java:745)
+	at java.lang.Thread.run(Unknown Source)
 Caused by: java.lang.reflect.InvocationTargetException
 	at cyberfit.relogo.UserObserver$$FastClassByCGLIB$$3a39e39b.invoke(<generated>)
 	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
 	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
 	... 7 more
+Caused by: org.apache.poi.poifs.filesystem.OfficeXmlFileException: The supplied data appears to be in the Office 2007+ XML. You are calling the part of POI that deals with OLE2 Office Documents. You need to call a different part of POI to process this data (eg XSSF instead of HSSF)
+	at org.apache.poi.poifs.storage.HeaderBlock.<init>(HeaderBlock.java:131)
+	at org.apache.poi.poifs.storage.HeaderBlock.<init>(HeaderBlock.java:104)
+	at org.apache.poi.poifs.filesystem.POIFSFileSystem.<init>(POIFSFileSystem.java:138)
+	at org.apache.poi.hssf.usermodel.HSSFWorkbook.<init>(HSSFWorkbook.java:322)
+	at org.apache.poi.hssf.usermodel.HSSFWorkbook.<init>(HSSFWorkbook.java:303)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.ExcelBuilder$_closure2.doCall(ExcelBuilder.groovy:47)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:98)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:325)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:294)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1033)
+	at groovy.lang.Closure.call(Closure.java:415)
+	at groovy.lang.Closure.call(Closure.java:431)
+	at org.codehaus.groovy.runtime.IOGroovyMethods.withStream(IOGroovyMethods.java:1183)
+	at org.codehaus.groovy.runtime.ResourceGroovyMethods.withInputStream(ResourceGroovyMethods.java:1853)
+	at org.codehaus.groovy.runtime.dgm$1051.doMethodInvoke(Unknown Source)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.ExcelBuilder.<init>(ExcelBuilder.groovy:46)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.loadCPTs(UserObserver.groovy:160)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.setup(UserObserver.groovy:39)
+	... 10 more
+FATAL [Thread-7] 2018-09-26 15:31:33,420 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+>>>>>>> 7320620ed464df515eeeedf714c561638172b83e
+Current tick (0.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+<<<<<<< HEAD
+	at java.lang.Thread.run(Thread.java:745)
+=======
+	at java.lang.Thread.run(Unknown Source)
+>>>>>>> 7320620ed464df515eeeedf714c561638172b83e
+Caused by: java.lang.reflect.InvocationTargetException
+	at cyberfit.relogo.UserObserver$$FastClassByCGLIB$$3a39e39b.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+<<<<<<< HEAD
 Caused by: org.codehaus.groovy.runtime.typehandling.GroovyCastException: Cannot cast object 'cyberfit.relogo.Campaign$Cpt@26cdc249' with class 'cyberfit.relogo.Campaign$Cpt' to class 'cyberfit.relogo.Campaign$Mission'
 	at org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation.continueCastOnSAM(DefaultTypeTransformation.java:415)
 	at org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation.continueCastOnNumber(DefaultTypeTransformation.java:329)
 	at org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation.castToType(DefaultTypeTransformation.java:243)
 	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
 	at cyberfit.relogo.UserObserver.setup(UserObserver.groovy:31)
+=======
+Caused by: org.apache.poi.poifs.filesystem.OfficeXmlFileException: The supplied data appears to be in the Office 2007+ XML. You are calling the part of POI that deals with OLE2 Office Documents. You need to call a different part of POI to process this data (eg XSSF instead of HSSF)
+	at org.apache.poi.poifs.storage.HeaderBlock.<init>(HeaderBlock.java:131)
+	at org.apache.poi.poifs.storage.HeaderBlock.<init>(HeaderBlock.java:104)
+	at org.apache.poi.poifs.filesystem.POIFSFileSystem.<init>(POIFSFileSystem.java:138)
+	at org.apache.poi.hssf.usermodel.HSSFWorkbook.<init>(HSSFWorkbook.java:322)
+	at org.apache.poi.hssf.usermodel.HSSFWorkbook.<init>(HSSFWorkbook.java:303)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.ExcelBuilder$_closure2.doCall(ExcelBuilder.groovy:47)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:98)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:325)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:294)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1033)
+	at groovy.lang.Closure.call(Closure.java:415)
+	at groovy.lang.Closure.call(Closure.java:431)
+	at org.codehaus.groovy.runtime.IOGroovyMethods.withStream(IOGroovyMethods.java:1183)
+	at org.codehaus.groovy.runtime.ResourceGroovyMethods.withInputStream(ResourceGroovyMethods.java:1853)
+	at org.codehaus.groovy.runtime.dgm$1051.doMethodInvoke(Unknown Source)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.ExcelBuilder.<init>(ExcelBuilder.groovy:46)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.loadCPTs(UserObserver.groovy:160)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.setup(UserObserver.groovy:39)
+	... 10 more
+FATAL [Thread-7] 2018-09-27 18:23:52,126 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (0.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at cyberfit.relogo.UserObserver$$FastClassByCGLIB$$3a39e39b.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: org.apache.poi.poifs.filesystem.OfficeXmlFileException: The supplied data appears to be in the Office 2007+ XML. You are calling the part of POI that deals with OLE2 Office Documents. You need to call a different part of POI to process this data (eg XSSF instead of HSSF)
+	at org.apache.poi.poifs.storage.HeaderBlock.<init>(HeaderBlock.java:131)
+	at org.apache.poi.poifs.storage.HeaderBlock.<init>(HeaderBlock.java:104)
+	at org.apache.poi.poifs.filesystem.POIFSFileSystem.<init>(POIFSFileSystem.java:138)
+	at org.apache.poi.hssf.usermodel.HSSFWorkbook.<init>(HSSFWorkbook.java:322)
+	at org.apache.poi.hssf.usermodel.HSSFWorkbook.<init>(HSSFWorkbook.java:303)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.ExcelBuilder$_closure2.doCall(ExcelBuilder.groovy:47)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:98)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:325)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:294)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1033)
+	at groovy.lang.Closure.call(Closure.java:415)
+	at groovy.lang.Closure.call(Closure.java:431)
+	at org.codehaus.groovy.runtime.IOGroovyMethods.withStream(IOGroovyMethods.java:1183)
+	at org.codehaus.groovy.runtime.ResourceGroovyMethods.withInputStream(ResourceGroovyMethods.java:1853)
+	at org.codehaus.groovy.runtime.dgm$1051.doMethodInvoke(Unknown Source)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.ExcelBuilder.<init>(ExcelBuilder.groovy:46)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.loadCPTs(UserObserver.groovy:160)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.setup(UserObserver.groovy:39)
+>>>>>>> 7320620ed464df515eeeedf714c561638172b83e
 	... 10 more

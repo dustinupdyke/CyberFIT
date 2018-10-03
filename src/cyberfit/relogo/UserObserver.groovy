@@ -19,6 +19,23 @@ class UserObserver extends ReLogoObserver{
 				
 		clearAll()
 		
+		
+		Campaign c = new Campaign()
+		def missions = c.loadMissions()
+		
+		print "missions:"
+		for(Campaign.Mission mission : missions) {
+			print mission.missionId
+		}
+		print "---"
+		
+		print "cpts:"
+		def cpts = c.loadCPTs()
+		for(Campaign.Cpt cpt : cpts) {
+			print cpt.team
+		}
+		print "---"
+		
 		setDefaultShape(Terrain,"box")
 		setDefaultShape(Defender,"person")
 		setDefaultShape(Attacker,"person")
@@ -27,7 +44,7 @@ class UserObserver extends ReLogoObserver{
 		loadCPTs()		
 		loadAttackers()
 		loadMissions()
-		print "missions loaded"
+		
 		assignCPTs()
 	}
 	

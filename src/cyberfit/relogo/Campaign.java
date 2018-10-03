@@ -30,7 +30,8 @@ public class Campaign {
 		sheet.forEach(row -> {
             row.forEach(cell -> {
                 String cellValue = dataFormatter.formatCellValue(cell);
-                //System.out.print(cellValue + "\t");
+                System.out.print(cellValue + "\t");
+                
                 
             });
             //System.out.println();

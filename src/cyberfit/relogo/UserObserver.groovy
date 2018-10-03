@@ -103,8 +103,8 @@ class UserObserver extends ReLogoObserver{
 	
 	def loadMissions() {
 		
-		//Campaign c1 = new Campaign()
-		//c1.loadMissions()
+		Campaign c1 = new Campaign()
+		c1.loadMissions()
 
 	}
 	
@@ -173,7 +173,6 @@ class UserObserver extends ReLogoObserver{
 	
 	def loadCPTs() {
 		
-<<<<<<< HEAD
 		//ExcelBuilder e = new ExcelBuilder("C:\\Users\\gdobson\\Documents\\GitHub\\cyberfit\\docs\\campaign_01_CPTs.xlsx")
 		//def s = e.getSheet(1)
 		  
@@ -182,7 +181,6 @@ class UserObserver extends ReLogoObserver{
 		//def sheet=wb.getSheet("Sheet1")
 		//r=sheet.getRows()
 		//def r 
-=======
 		//Campaign c2 = new Campaign()
 		//c2.loadCPTs()
 		
@@ -191,7 +189,6 @@ class UserObserver extends ReLogoObserver{
 		createDefenders(1){ [setxy(-32,20), setColor(green()), team = 1, rank = "O2", experienceMissions = 3, experienceTraining = 15] }
 		createDefenders(1){ [setxy(-36,20), setColor(green()), team = 1, rank = "w4", experienceMissions = 16, experienceTraining = 90] }
 		createDefenders(1){ [setxy(-40,20), setColor(green()), team = 1, rank = "w2", experienceMissions = 10, experienceTraining = 72] }
->>>>>>> d47e0f89b648812271c4008dab315a194b8eb1be
 		
 		
 		createDefenders(1){ [setxy(-100,100), setColor(green()), team = 1, rank = "O3", experienceMissions = 4, experienceTraining = 50] }

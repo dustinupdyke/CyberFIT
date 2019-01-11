@@ -13,8 +13,8 @@ import repast.simphony.relogo.schedule.Setup
 
 class Attacker extends UserTurtle {
 	
-	def tier = 1 // 1 - 5 based on Defense Science Board Report
 	def aGrup = 0 //id of group the adversary
+	def tier = 1 // 1 - 5 based on Defense Science Board Report, 5 being the most sophisticated
 	
 	/* lockheed martin kill chain
 	 * 0 = not started
@@ -70,11 +70,21 @@ class Attacker extends UserTurtle {
 				attackerWorkstation.setColor(gray())
 				
 				//now connect from that workstation out to a target machine in the battlespace
-				def attackerTargetLink = attackerWorkstation.createInteractionTTTo(oneOf(terrains().with({type.equals(1) || type.equals(2) || type.equals(3)})))
+				def target = oneOf(terrains().with({type.equals(1) || type.equals(2) || type.equals(3)}))
+				def attackerTargetLink = attackerWorkstation.createInteractionTTTo(target)
 				attackerTargetLink.lifetime = phasetime
 				attackerTargetLink.color = gray()
 				
 				this.setColor(gray())
+				
+				//ZERO tier 5 teams will develop and deploy a custom zero-day vuln some percent of the time
+				if(this.tier > 4) {
+					def r = 0//random.nextInt(10)
+					if(r < 1) {
+						target.addZeroDay()
+					}
+				}
+				//END ZERO
 			}
 			isPhaseSwitch = false
 			break

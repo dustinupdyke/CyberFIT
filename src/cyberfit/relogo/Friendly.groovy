@@ -17,7 +17,6 @@ class Friendly extends UserTurtle {
 	def missionId = 0 //mission ID of friendly agent
 	
 	def setup(){
-	
 	}
 	
 	def step() {
@@ -25,7 +24,5 @@ class Friendly extends UserTurtle {
 		 * interact with terrain (InteractionFT)
 		 * do nothing 
 		 * */
-		
 	}
-	
 }

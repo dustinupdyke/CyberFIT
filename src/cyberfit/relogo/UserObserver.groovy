@@ -38,18 +38,10 @@ class UserObserver extends ReLogoObserver{
 		setDefaultShape(Attacker,"person")
 		setDefaultShape(Friendly,"person")
 		
-
 		loadBaseTerrain()
 		loadCPTs()		
 		loadAttackers()
 		
-
-		//loadBaseTerrain()
-		//loadCPTs()		
-		//loadAttackers()
-		//loadTerrains()
-		//loadFriendlys()
-
 		loadMissions()
 
 		assignCPTs()
@@ -70,7 +62,6 @@ class UserObserver extends ReLogoObserver{
 		ask(interactionFFs()) {
 			step()
 		}
-		
 		
 		//then actions
 		ask(terrains()) {

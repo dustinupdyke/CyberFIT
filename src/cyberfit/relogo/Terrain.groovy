@@ -24,7 +24,8 @@ class Terrain extends ReLogoTurtle {
 	}
 	
 	def step() {
-
+		
+		//check if there are interactions and set color based on
 		generateVuls()
 		
 	}

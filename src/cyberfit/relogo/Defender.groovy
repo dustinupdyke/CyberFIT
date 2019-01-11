@@ -49,7 +49,7 @@ class Defender extends UserTurtle{
 			def workstation = oneOf(terrains().with({type.equals(99)})) //connect me to a machine
 			def workstationLink = createInteractionFTTo(workstation)
 			workstation.setColor(blue())
-			d.setColor(blue())
+			// d.setColor(blue())
 			
 			workstationLink.lifetime = random.nextInt(4)
 			workstationLink.color = blue()

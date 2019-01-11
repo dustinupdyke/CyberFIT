@@ -41,8 +41,8 @@ class UserObserver extends ReLogoObserver{
 		loadBaseTerrain()
 		loadCPTs()		
 		loadAttackers()
-		loadTerrains()
-		loadFriendlys()
+		
+		loadMissions()
 
 		assignCPTs()
 	}
@@ -101,9 +101,8 @@ class UserObserver extends ReLogoObserver{
 		def y = 10
 		def whileStop = 0
 		
-		print "missions:"
 		for(Campaign.Mission mission : missions) {
-			
+			print "processing mission: ${mission.missionId}"
 			y=y+2
 			def x = 40
 			
@@ -113,66 +112,56 @@ class UserObserver extends ReLogoObserver{
 			def numT2 = mission.numTerrainT2
 			def numT3 = mission.numTerrainT3
 			
-			//createTerrains(mission.numTerrainT1){ [setColor(brown()), type = 1] }
-			print numT1
+			print "creating terrain"
 			createTerrains(1){ [setxy(randomPxcor(),randomPycor()), setColor(orange()), type = 1] }
 			
+			def i = 0
+			i.upto(mission.numFriendlyForces.toInteger()) {
+				println "creating friendly ${i}"
+				createFriendlys(1){ [setxy(10+i,0), setColor(green()), missionId = mission.missionId] }
+				i = i + 1				
+			 }
 			
-			//I can't figure out how to call while loop within an arraylist loop, groovy throws run time exception
-			//Here - I want to call while loops that build friendly and terrain agents based on mission requirements
-			
-				
+			 x = -20
+			 y = 10
+			 
+			 print "routers:"
+			 i = 0
+			 i.upto(mission.numTerrainT1.toInteger()) {
+				 println "creating router ${i}"
+				 createTerrains(1){ [setxy(x+i,y), setColor(brown()), missionsSupported.add(mission.missionId), type=1]}
+				 i = i+ 1
+			 }
+			 
+			 x = -20
+			 y = -10
+			 
+			 print "servers:"
+			 i = 0
+			 i.upto(mission.numTerrainT2.toInteger()) {
+				 println "creating server ${i}"
+				 createTerrains(1){ [setxy(x+i,y), setColor(brown()), missionsSupported.add(mission.missionId), type=2]}
+				 i = i+ 1
+			 }
+	
+			 x = 20
+			 y = 10
+			 
+			 print "client workstations:"
+			 i = 0
+			 i.upto(mission.numTerrainT3.toInteger()) {
+				 println "creating workstation ${i}"
+				 createTerrains(1){ [setxy(x+i,y), setColor(brown()), missionsSupported.add(mission.missionId), type=3]}
+				 i = i+ 1
+			 }
 		}
 		print "---"
 
 	}
 	
-	def loadFriendlys() {
-		
-		Campaign c2 = new Campaign()
-		def friendlys = c2.loadFriendlys()
-		def x = 10
-		def y = 10
-		
-		//print "friendlys:"
-		for(Campaign.Friendly friendly : friendlys) {
-			
-			createFriendlys(1){ [setxy(x,y), setColor(green()), missionId = friendly.missionID] }
-			x = x+1
-			
-			if (x%30 == 0) {
-				y = y + 1
-				x = 10
-			}
-		}
-	}
-	
-	def loadTerrains() {
-		
-		Campaign c3 = new Campaign()
-		def terrains = c3.loadTerrains()
-		def x = -20
-		def y = 10
-		
-		print "terrains:"
-		for(Campaign.Terrain terrain : terrains) {
-			
-			//print terrain.missionID
-			createTerrains(1){ [setxy(x,y), setColor(brown()), missionsSupported.add(terrain.missionID)]}
-			x = x+1
-			
-			if (x%30 == 0) {
-				y = y + 1
-				x = -20
-			}
-		}
-	}
-	
 	def assignCPTs() {
 		def xu = 1
 	}
-	
-	
 	
 	def loadCPTs() {
 		

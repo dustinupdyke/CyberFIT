@@ -274,3 +274,57 @@ Caused by: org.codehaus.groovy.runtime.typehandling.GroovyCastException: Cannot 
 	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
 	at cyberfit.relogo.UserObserver.setup(UserObserver.groovy:44)
 	... 10 more
+FATAL [Thread-7] 2019-01-11 09:42:44,401 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (0.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at cyberfit.relogo.UserObserver$$FastClassByCGLIB$$3a39e39b.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.IllegalArgumentException: Cannot compare java.lang.String with value '10' and java.lang.Integer with value '0'
+	at org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation.compareToWithEqualityCheck(DefaultTypeTransformation.java:607)
+	at org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation.compareTo(DefaultTypeTransformation.java:541)
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.compareTo(ScriptBytecodeAdapter.java:700)
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.compareGreaterThan(ScriptBytecodeAdapter.java:750)
+	at cyberfit.relogo.UserObserver.loadMissions(UserObserver.groovy:116)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.setup(UserObserver.groovy:46)
+	... 10 more
+Caused by: java.lang.ClassCastException: java.lang.Integer cannot be cast to java.lang.String
+	at java.lang.String.compareTo(Unknown Source)
+	at org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation.compareToWithEqualityCheck(DefaultTypeTransformation.java:594)
+	... 16 more
+FATAL [Thread-7] 2019-01-11 09:50:49,330 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (0.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at cyberfit.relogo.UserObserver$$FastClassByCGLIB$$3a39e39b.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: groovy.lang.MissingMethodException: No signature of method: java.lang.String.toInteger() is applicable for argument types: (String) values: [10]
+Possible solutions: toInteger(), isInteger(), toBigInteger()
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.unwrap(ScriptBytecodeAdapter.java:58)
+	at org.codehaus.groovy.vmplugin.v7.IndyGuardsFiltersAndSignatures.unwrap(IndyGuardsFiltersAndSignatures.java:177)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.loadMissions(UserObserver.groovy:116)
+	at org.codehaus.groovy.vmplugin.v7.IndyInterface.selectMethod(IndyInterface.java:232)
+	at cyberfit.relogo.UserObserver.setup(UserObserver.groovy:46)
+	... 10 more

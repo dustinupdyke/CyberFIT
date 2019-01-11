@@ -13,7 +13,7 @@ import repast.simphony.relogo.schedule.Setup
 
 class Attacker extends UserTurtle {
 	
-	def tier = 1 // 1 - 6 based on Defense Science Board Report
+	def tier = 1 // 1 - 5 based on Defense Science Board Report, 5 being the most sophisticated
 	
 	/* lockheed martin kill chain
 	 * 0 = not started

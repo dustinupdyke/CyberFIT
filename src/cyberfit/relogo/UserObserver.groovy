@@ -63,22 +63,21 @@ class UserObserver extends ReLogoObserver{
 			step()
 		}
 		
-		
 		//then actions
 		ask(terrains()) {
-			//step()
+			step()
 		}
 		
 		ask(defenders()) {
-			//step()
+			step()
 		}
 		
 		ask(attackers()) {
-			//step()
+			step()
 		}
 		
 		ask(friendlys()) {
-			//step()
+			step()
 		}
 		
 	}

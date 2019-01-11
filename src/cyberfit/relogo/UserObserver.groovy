@@ -38,18 +38,10 @@ class UserObserver extends ReLogoObserver{
 		setDefaultShape(Attacker,"person")
 		setDefaultShape(Friendly,"person")
 		
-<<<<<<< HEAD
 		loadBaseTerrain()
 		loadCPTs()		
 		loadAttackers()
 		
-=======
-		//loadBaseTerrain()
-		//loadCPTs()		
-		//loadAttackers()
-		//loadTerrains()
-		//loadFriendlys()
->>>>>>> b4b8d87d9e23a36a3e4cd559389a651951e02b94
 		loadMissions()
 
 		assignCPTs()

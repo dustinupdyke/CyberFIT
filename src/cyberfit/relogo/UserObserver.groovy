@@ -45,6 +45,10 @@ class UserObserver extends ReLogoObserver{
 		loadMissions()
 
 		assignCPTs()
+		
+		ask(attackers()) {
+			setup()
+		}
 	}
 	
 	@Go

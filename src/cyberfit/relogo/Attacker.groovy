@@ -31,6 +31,14 @@ class Attacker extends UserTurtle {
 	def isPhaseSwitch = false
 	
 	def setup(){	
+		//initialize attacks - if tier = 5, give attacks 1 to 99
+		def attacks = random.nextInt(100) / 5
+		def i = 0
+		i.upto(attacks) {
+			def attackNumber = (random.nextInt(100) / -5) + 100
+			this.attacks.add(attackNumber) 
+			print "adding attack ${attackNumber}" 
+		}
 	}
 
 	def step() {

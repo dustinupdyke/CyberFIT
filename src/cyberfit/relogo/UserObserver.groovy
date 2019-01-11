@@ -38,10 +38,18 @@ class UserObserver extends ReLogoObserver{
 		setDefaultShape(Attacker,"person")
 		setDefaultShape(Friendly,"person")
 		
+<<<<<<< HEAD
 		loadBaseTerrain()
 		loadCPTs()		
 		loadAttackers()
 		
+=======
+		//loadBaseTerrain()
+		//loadCPTs()		
+		//loadAttackers()
+		//loadTerrains()
+		//loadFriendlys()
+>>>>>>> b4b8d87d9e23a36a3e4cd559389a651951e02b94
 		loadMissions()
 
 		assignCPTs()
@@ -66,19 +74,19 @@ class UserObserver extends ReLogoObserver{
 		
 		//then actions
 		ask(terrains()) {
-			step()
+			//step()
 		}
 		
 		ask(defenders()) {
-			step()
+			//step()
 		}
 		
 		ask(attackers()) {
-			step()
+			//step()
 		}
 		
 		ask(friendlys()) {
-			step()
+			//step()
 		}
 		
 	}
@@ -99,21 +107,31 @@ class UserObserver extends ReLogoObserver{
 		def missions = c1.loadMissions()
 		
 		def y = 10
-		def whileStop = 0
 		
 		for(Campaign.Mission mission : missions) {
 			print "processing mission: ${mission.missionId}"
 			y=y+2
 			def x = 40
 			
-			def numForces = mission.numFriendlyForces
 			def mID = mission.missionId
+			def numForces = mission.numFriendlyForces
 			def numT1 = mission.numTerrainT1
 			def numT2 = mission.numTerrainT2
 			def numT3 = mission.numTerrainT3
 			
 			print "creating terrain"
 			createTerrains(1){ [setxy(randomPxcor(),randomPycor()), setColor(orange()), type = 1] }
+
+			def n = numForces.toInteger()
+			
+			while(n > 0) {
+				print numForces
+				n = n - 1
+			}
+			
+			//createTerrains(mission.numTerrainT1){ [setColor(brown()), type = 1] }
+			print numForces
+			//createTerrains(1){ [setxy(randomPxcor(),randomPycor()), setColor(orange()), type = 1] }
 			
 			def i = 0
 			i.upto(mission.numFriendlyForces.toInteger()) {

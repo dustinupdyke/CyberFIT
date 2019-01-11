@@ -610,6 +610,203 @@ public class ReLogoPatch extends BasePatch{
 	}
 
 	/**
+	 * Sprouts (makes) a number of new planners and then executes a set of commands on the
+	 * created planners.
+	 * 
+	 * @param number
+	 *            a number
+	 * @param closure
+	 *            a set of commands
+	 * @return created planners
+	 */
+	@ReLogoBuilderGeneratedFor("cyberfit.relogo.Planner")
+	public AgentSet<cyberfit.relogo.Planner> sproutPlanners(int number, Closure closure) {
+		AgentSet<cyberfit.relogo.Planner> result = new AgentSet<>();
+		AgentSet<Turtle> createResult = this.sprout(number,closure,"Planner");
+		for (Turtle t : createResult){
+			if (t instanceof cyberfit.relogo.Planner){
+				result.add((cyberfit.relogo.Planner)t);
+			}
+		} 
+		return result;
+	}
+
+	/**
+	 * Sprouts (makes) a number of new planners and then executes a set of commands on the
+	 * created planners.
+	 * 
+	 * @param number
+	 *            a number
+	 * @param closure
+	 *            a set of commands
+	 * @return created planners
+	 */
+	@ReLogoBuilderGeneratedFor("cyberfit.relogo.Planner")
+	public AgentSet<cyberfit.relogo.Planner> sproutPlanners(int number) {
+		return sproutPlanners(number,null);
+	}
+
+	/**
+	 * Returns an agentset of planners from the patch of the caller.
+	 * 
+	 * @return agentset of planners from the caller's patch
+	 */
+	@ReLogoBuilderGeneratedFor("cyberfit.relogo.Planner")
+	public AgentSet<cyberfit.relogo.Planner> plannersHere(){
+	  Grid grid = getMyObserver().getGrid();
+	  GridPoint gridPoint = grid.getLocation(this);
+	  AgentSet<cyberfit.relogo.Planner> result = new AgentSet<cyberfit.relogo.Planner>();
+	  for (Turtle t : Utility.getTurtlesOnGridPoint(gridPoint,getMyObserver(),"planner")){
+			if (t instanceof cyberfit.relogo.Planner)
+			result.add((cyberfit.relogo.Planner)t);
+		}
+		return result;
+	}
+
+	/**
+	 * Returns the agentset of planners on the patch at the direction (ndx, ndy) from the
+	 * caller.
+	 * 
+	 * @param nX
+	 *            a number
+	 * @param nY
+	 *            a number
+	 * @returns agentset of planners at the direction (nX, nY) from the caller
+	 */
+	@ReLogoBuilderGeneratedFor("cyberfit.relogo.Planner")
+	public AgentSet<cyberfit.relogo.Planner> plannersAt(Number nX, Number nY){
+		double dx = nX.doubleValue();
+		double dy = nY.doubleValue();
+		double[] displacement = {dx,dy};
+
+		try{
+		GridPoint gridPoint = Utility.getGridPointAtDisplacement(getGridLocationAsNdPoint(),displacement,getMyObserver());
+		AgentSet<cyberfit.relogo.Planner> result = new AgentSet<cyberfit.relogo.Planner>();						
+		for (Turtle t : Utility.getTurtlesOnGridPoint(gridPoint,getMyObserver(),"planner")){
+			if (t instanceof cyberfit.relogo.Planner)
+			result.add((cyberfit.relogo.Planner)t);
+		}
+		return result;
+		}
+		catch(SpatialException e){
+			return new AgentSet<cyberfit.relogo.Planner>();
+		}
+	}
+
+	/**
+	 * Returns an agentset of planners on a given patch.
+	 * 
+	 * @param p
+	 *            a patch
+	 * @return agentset of planners on patch p
+	 */
+	@ReLogoBuilderGeneratedFor("cyberfit.relogo.Planner")
+	public AgentSet<cyberfit.relogo.Planner> plannersOn(Patch p){
+		AgentSet<cyberfit.relogo.Planner> result = new AgentSet<cyberfit.relogo.Planner>();						
+		for (Turtle t : Utility.getTurtlesOnGridPoint(p.getGridLocation(),getMyObserver(),"planner")){
+			if (t instanceof cyberfit.relogo.Planner)
+			result.add((cyberfit.relogo.Planner)t);
+		}
+		return result;
+	}
+
+	/**
+	 * Returns an agentset of planners on the same patch as a turtle.
+	 * 
+	 * @param t
+	 *            a turtle
+	 * @return agentset of planners on the same patch as turtle t
+	 */
+	@ReLogoBuilderGeneratedFor("cyberfit.relogo.Planner")
+	public AgentSet<cyberfit.relogo.Planner> plannersOn(Turtle t){
+		AgentSet<cyberfit.relogo.Planner> result = new AgentSet<cyberfit.relogo.Planner>();						
+		for (Turtle tt : Utility.getTurtlesOnGridPoint(Utility.ndPointToGridPoint(t.getTurtleLocation()),getMyObserver(),"planner")){
+			if (tt instanceof cyberfit.relogo.Planner)
+			result.add((cyberfit.relogo.Planner)tt);
+		}
+		return result;
+	}
+
+	/**
+	 * Returns an agentset of planners on the patches in a collection or on the patches
+	 * that a collection of turtles are.
+	 * 
+	 * @param a
+	 *            a collection
+	 * @return agentset of planners on the patches in collection a or on the patches
+	 *         that collection a turtles are
+	 */
+	@ReLogoBuilderGeneratedFor("cyberfit.relogo.Planner")
+	public AgentSet<cyberfit.relogo.Planner> plannersOn(Collection c){
+
+		if (c == null || c.isEmpty()){
+			return new AgentSet<cyberfit.relogo.Planner>();
+		}
+
+		Set<cyberfit.relogo.Planner> total = new HashSet<cyberfit.relogo.Planner>();
+		if (c.iterator().next() instanceof Turtle){
+			for (Object o : c){
+				if (o instanceof Turtle){
+					Turtle t = (Turtle) o;
+					total.addAll(plannersOn(t));
+				}
+			}
+		}
+		else {
+			for (Object o : c){
+				if (o instanceof Patch){
+					Patch p = (Patch) o;
+					total.addAll(plannersOn(p));
+				}
+			}
+		}
+		return new AgentSet<cyberfit.relogo.Planner>(total);
+	}
+
+	/**
+	 * Queries if object is a planner.
+	 * 
+	 * @param o
+	 *            an object
+	 * @return true or false based on whether the object is a planner
+	 */
+	@ReLogoBuilderGeneratedFor("cyberfit.relogo.Planner")
+	public boolean isPlannerQ(Object o){
+		return (o instanceof cyberfit.relogo.Planner);
+	}
+
+	/**
+	 * Returns an agentset containing all planners.
+	 * 
+	 * @return agentset of all planners
+	 */
+	@ReLogoBuilderGeneratedFor("cyberfit.relogo.Planner")
+	public AgentSet<cyberfit.relogo.Planner> planners(){
+		AgentSet<cyberfit.relogo.Planner> a = new AgentSet<cyberfit.relogo.Planner>();
+		for (Object e : this.getMyObserver().getContext().getObjects(cyberfit.relogo.Planner.class)) {
+			if (e instanceof cyberfit.relogo.Planner){
+				a.add((cyberfit.relogo.Planner)e);
+			}
+		}
+		return a;
+	}
+
+	/**
+	 * Returns the planner with the given who number.
+	 * 
+	 * @param number
+	 *            a number
+	 * @return turtle number
+	 */
+	@ReLogoBuilderGeneratedFor("cyberfit.relogo.Planner")
+	public cyberfit.relogo.Planner planner(Number number){
+		Turtle turtle = Utility.turtleU(number.intValue(), getMyObserver());
+		if (turtle instanceof cyberfit.relogo.Planner)
+			return (cyberfit.relogo.Planner) turtle;
+		return null;
+	}
+
+	/**
 	 * Sprouts (makes) a number of new terrains and then executes a set of commands on the
 	 * created terrains.
 	 * 

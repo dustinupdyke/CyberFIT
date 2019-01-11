@@ -13,14 +13,11 @@ import repast.simphony.relogo.schedule.Setup
 
 class Terrain extends ReLogoTurtle {
 
-	def status = 0
+	def status = 0 // 0 - ok, 1 - compromised
 	def type = 1 //1 - routing, 2 - server, 3 - user, 66 = attacker workstation, 99 = defender workstation
-	def isCompromised = false
 	def vulns = [] //array of vulnerability ids
 	def missionsSupported = []
-	def confidentiality = 1
-	def integrity = 	1
-	def availability = 1
+
 	
 	def setup(){
 	

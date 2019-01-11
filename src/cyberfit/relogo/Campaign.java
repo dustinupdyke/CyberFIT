@@ -17,13 +17,16 @@ public class Campaign {
 
 	public static final String MPATH = "./docs/campaign_01_missions.xlsx";
 	public static final String CPATH = "./docs/campaign_01_CPTs.xlsx";
+	public static final String FPATH = "./docs/campaign_01_friendlys.xlsx";
+	public static final String TPATH = "./docs/campaign_01_terrains.xlsx";
 	
 	public class Mission
 	{
 		public String missionId;
-		public String missionType;
 		public String numFriendlyForces;
-		public String numTerrain;
+		public String numTerrainT1;
+		public String numTerrainT2;
+		public String numTerrainT3;		
 	}
 	
 	int i = 0;
@@ -50,11 +53,13 @@ public class Campaign {
                 if(i == 0)
                 		mission.missionId = cellValue;
                 else if (i ==1)
-                		mission.missionType = cellValue;
-                else if(i ==2)
                 		mission.numFriendlyForces = cellValue;
+                else if(i ==2) 
+                		mission.numTerrainT1 = cellValue;
                 else if(i==3)
-                		mission.numTerrain = cellValue;
+                		mission.numTerrainT2 = cellValue;
+                else if(i==4)
+            			mission.numTerrainT3 = cellValue;
                 
                 i = i + 1;
             });
@@ -70,15 +75,15 @@ public class Campaign {
 		return list;
 	}
 	
-	public class Cpt
+	public class Soldier
 	{
 		public String team;
 		public String rank;
-		public String experienceMissions;
-		public String experienceTraining;
+		public String expMissions;
+		public String expTraining;
 	}
 	
-	public ArrayList<Cpt> loadCPTs() throws Exception, IOException {
+	public ArrayList<Soldier> loadSoldiers() throws Exception, IOException {
 		
 		//id, type, forces, terrain
 		
@@ -89,33 +94,102 @@ public class Campaign {
 		int rowNum = 1;
 		int rowPosition = -10;
 		
-		ArrayList<Cpt> list = new ArrayList<Cpt>();
+		ArrayList<Soldier> list = new ArrayList<Soldier>();
 
 		sheet.forEach(row -> {
-			Cpt cpt = new Cpt();
+			Soldier soldier = new Soldier();
 			i = 0;
             row.forEach(cell -> {
                 String cellValue = dataFormatter.formatCellValue(cell);
 
                 if(i == 0)
-            			cpt.team = cellValue;
+            			soldier.team = cellValue;
 	            else if (i ==1)
-	            		cpt.rank = cellValue;
+	            		soldier.rank = cellValue;
 	            else if(i ==2)
-	            		cpt.experienceMissions = cellValue;
+	            		soldier.expMissions = cellValue;
 	            else if(i==3)
-	            		cpt.experienceTraining = cellValue;
+	            		soldier.expTraining = cellValue;
             
             i = i + 1;
         });
         
-        list.add(cpt);
-            //createDefenders(1){ [setxy(-100,rowPosition), setColor(green()), team = 1, rank = "O3", experienceMissions = 4, experienceTraining = 50] };
-            //rowNum++;
+        list.add(soldier);
         });
 
-        // Closing the workbook
-        //((FileInputStream) workbook).close();
+		
+		return list;
+	}
+	
+	public class Friendly
+	{
+		public String missionID;
+	}
+	
+	public ArrayList<Friendly> loadFriendlys() throws Exception, IOException {
+		
+		//id, type, forces, terrain
+		
+		Workbook workbook = WorkbookFactory.create(new File(FPATH));
+		
+		Sheet sheet = workbook.getSheetAt(0);
+		DataFormatter dataFormatter = new DataFormatter();
+		int rowNum = 1;
+		int rowPosition = -10;
+		
+		ArrayList<Friendly> list = new ArrayList<Friendly>();
+
+		sheet.forEach(row -> {
+			Friendly friendly = new Friendly();
+			i = 0;
+            row.forEach(cell -> {
+                String cellValue = dataFormatter.formatCellValue(cell);
+
+                if(i == 0)
+            			friendly.missionID = cellValue;
+            
+            i = i + 1;
+        });
+        
+        list.add(friendly);
+        });
+		
+		return list;
+	}
+	
+	public class Terrain
+	{
+		public String missionID;
+		public String tType;
+	}
+	
+	public ArrayList<Terrain> loadTerrains() throws Exception, IOException {
+		
+		Workbook workbook = WorkbookFactory.create(new File(TPATH));
+		
+		Sheet sheet = workbook.getSheetAt(0);
+		DataFormatter dataFormatter = new DataFormatter();
+		int rowNum = 1;
+		int rowPosition = -10;
+		
+		ArrayList<Terrain> list = new ArrayList<Terrain>();
+
+		sheet.forEach(row -> {
+			Terrain terrain = new Terrain();
+			i = 0;
+            row.forEach(cell -> {
+                String cellValue = dataFormatter.formatCellValue(cell);
+
+                if(i == 0)
+            			terrain.missionID = cellValue;
+                if(i == 1)
+        			terrain.tType = cellValue;
+                
+            i = i + 1;
+        });
+        
+        list.add(terrain);
+        });
 		
 		return list;
 	}

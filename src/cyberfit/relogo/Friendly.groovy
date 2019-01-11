@@ -14,7 +14,6 @@ import repast.simphony.relogo.schedule.Setup
 
 class Friendly extends UserTurtle {
 
-	def type = "0" //mission type of friendly agent assigned
 	def missionId = 0 //mission ID of friendly agent
 	
 	def setup(){

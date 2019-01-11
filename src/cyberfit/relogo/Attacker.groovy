@@ -59,7 +59,7 @@ class Attacker extends UserTurtle {
 			}
 			
 			if(random.nextInt(100) > 50) {
-				print "Recon connection"
+				//print "Recon connection"
 				
 				//get on an attacker workstation
 				def attackerWorkstation = oneOf(terrains().with({type.equals(66)})) //connect me to a machine
@@ -88,7 +88,7 @@ class Attacker extends UserTurtle {
 				phasetime = random.nextInt(100)
 			}
 			if(isPhaseSwitch) {
-				print "Weaponizing"
+				//print "Weaponizing"
 				
 				def attackerWorkstation = oneOf(terrains().with({type.equals(66)})) //connect me to a machine
 				attackerWorkstation.setColor(pink())
@@ -116,7 +116,7 @@ class Attacker extends UserTurtle {
 			}
 			
 			if(isPhaseSwitch) {
-				print "Delivering payload..."
+				//print "Delivering payload..."
 				
 				def attackerWorkstation = oneOf(terrains().with({type.equals(66)})) //connect me to a machine
 				attackerWorkstation.setColor(magenta())
@@ -185,6 +185,6 @@ class Attacker extends UserTurtle {
 		   
 		  
 	   
-	   print "phase: " + phase + " | phasetime: " + phasetime
+	   //print "phase: " + phase + " | phasetime: " + phasetime
 	}
 }

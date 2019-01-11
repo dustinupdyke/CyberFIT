@@ -24,12 +24,13 @@ class InteractionFF extends ReLogoLink {
 		
 	def step(){
 		if(lifetime == 0) {
-			//print "dead"
+			//if this interaction is between a planner and a lead -> then exchange responsible terrain status update and update mission plan
 			die()
 		}
 		else {
 			lifetime--
 		}
+		
 					
 	}
 }

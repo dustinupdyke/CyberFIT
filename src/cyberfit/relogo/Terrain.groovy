@@ -43,24 +43,30 @@ class Terrain extends UserTurtle {
 		 *
 		 */
 		
-		def r = random.nextInt(100) - 1
+		def r = random.nextInt(10000) - 1
 		
 		//20% of the time, there is a new vuln
 		if(r < 20) {  
 			// vuln occurred, get random r2 between 0 - 29, add to vuln array
-			r = random.nextInt(100) - 1
+			r = random.nextInt(10000) - 1
 			vulns.add(r)
 			print "vuln added ${r}"
+			this.setColor(getColor()+1)
 		}
 	
-			
 		//also, terrain might grow a zero day, at any given time		
 		//get random r3 between 1 and 200, if r3 < 2, add 0 to vuln array 
-		r = random.nextInt(200)
-		if(r < 2) {
+		r = random.nextInt(20000)
+		if(r < 1) {
 			vulns.add(0)
-			print "vuln added (zero day) ${r}"
+			print "Zero day has occured ${r}"
+			this.setColor(red())
 		}
-		
+	}
+	
+	def addZeroDay() {
+		this.vulns.add(0)
+		print "Tier 5 team has deployed a zero day"
+		this.setColor(red())
 	}
 }

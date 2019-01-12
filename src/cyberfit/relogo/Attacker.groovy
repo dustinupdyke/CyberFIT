@@ -13,6 +13,7 @@ import repast.simphony.relogo.schedule.Setup
 
 class Attacker extends UserTurtle {
 	
+	def aGrup = 0 //id of group the adversary
 	def tier = 1 // 1 - 5 based on Defense Science Board Report, 5 being the most sophisticated
 	
 	/* lockheed martin kill chain
@@ -30,14 +31,24 @@ class Attacker extends UserTurtle {
 	def attacks = [] //array of attacks available to the agent
 	def isPhaseSwitch = false
 	
+	
+	
+	// GEOFF: I think these chance numbers need to be clearly defined class variables 
+	// so that you can easily report on them, 
+	// otherwise, they are hard to track and understand
+	def chanceZeroDayCanBeDeveloped = 50000 //also must be tier = 5
+	def tierMultiplier = 20 * this.tier //of 100
+	
+	
+	
 	def setup(){	
-		//initialize attacks - if tier = 5, give attacks 1 to 99
-		def attacks = random.nextInt(100) / 5
+		//initialize attacks - if tier = 5, give attacks 1 to 20(tier 1), 1 to 40(tier 2), 1 to 60(tier 3), 1 to 80(tier 4), 1 to 100(tier 5)
+		def attacks = random.nextInt(this.tierMultiplier)
 		def i = 0
 		i.upto(attacks) {
-			def attackNumber = (random.nextInt(100) / -5) + 100
+			def attackNumber = random.nextInt(this.tierMultiplier)
 			this.attacks.add(attackNumber) 
-			print "adding attack ${attackNumber}" 
+			print "Tier ${this.tier} team added attack ${attackNumber} (${this.tierMultiplier} multiplier)" 
 		}
 	}
 
@@ -86,8 +97,9 @@ class Attacker extends UserTurtle {
 				
 				//ZERO tier 5 teams will develop and deploy a custom zero-day vuln some percent of the time
 				if(this.tier > 4) {
-					def r = 0//random.nextInt(10)
+					def r = random.nextInt(chanceZeroDayCanBeDeveloped)
 					if(r < 1) {
+						print "Zero day developed (1 in ${chanceZeroDayCanBeDeveloped}"
 						target.addZeroDay()
 					}
 				}

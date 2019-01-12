@@ -84,6 +84,9 @@ class UserObserver extends ReLogoObserver{
 			step()
 		}
 		
+		//update 
+		
+		
 	}
 	
 	def checkCPTsAssigned() {
@@ -114,20 +117,7 @@ class UserObserver extends ReLogoObserver{
 			def numT2 = mission.numTerrainT2
 			def numT3 = mission.numTerrainT3
 			
-			print "creating terrain"
-			createTerrains(1){ [setxy(randomPxcor(),randomPycor()), setColor(orange()), type = 1] }
-
-			def n = numForces.toInteger()
-			
-			while(n > 0) {
-				print numForces
-				n = n - 1
-			}
-			
-			//createTerrains(mission.numTerrainT1){ [setColor(brown()), type = 1] }
-			print numForces
-			//createTerrains(1){ [setxy(randomPxcor(),randomPycor()), setColor(orange()), type = 1] }
-			
+			print "friendlys"
 			def i = 0
 			i.upto(mission.numFriendlyForces.toInteger()) {
 				println "creating friendly ${i}"
@@ -200,19 +190,27 @@ class UserObserver extends ReLogoObserver{
 	}
 	
 	def loadAttackers() {
-		createAttackers(1){ [setxy(5, -30), setColor(red()), tier = 1] }
-		createAttackers(1){ [setxy(0, -30), setColor(red()), tier = 1] }
-		createAttackers(1){ [setxy(-5,-30), setColor(red()), tier = 1] }
 		
-		//create attacker workstations
-		createTerrains(1){ [setxy(-5, -28), setColor(pink()), type = 66] }
-		createTerrains(1){ [setxy(-3, -28), setColor(pink()), type = 66] }
-		createTerrains(1){ [setxy(0, -28), setColor(pink()), type = 66] }
-		createTerrains(1){ [setxy(1, -28), setColor(pink()), type = 66] }
-		createTerrains(1){ [setxy(1, -28), setColor(pink()), type = 66] }
-		createTerrains(1){ [setxy(5, -28), setColor(pink()), type = 66] }
+		Campaign c4 = new Campaign()
 		
-	}
+		print "attackers:"
+		def attackers = c4.loadAttackers()
+		def x = 0
+		def y = -30
+		
+		for(Campaign.Attacker attacker : attackers) {
+			print attacker.aGroup
+			x = x+ 2
+			if(x == 10) {
+				x = 0
+				y = y -2
+			}
+			
+			createAttackers(1){ [setxy(x,y), setColor(red()), tier = attacker.tier] }
+			createTerrains(1){ [setxy(x+1,y+1), setColor(pink()), type = 66] }
+		}	
+				
+}
 	
 	def loadBaseTerrain(){
 		

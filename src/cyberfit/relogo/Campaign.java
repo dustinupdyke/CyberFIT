@@ -19,6 +19,7 @@ public class Campaign {
 	public static final String CPATH = "./docs/campaign_01_CPTs.xlsx";
 	public static final String FPATH = "./docs/campaign_01_friendlys.xlsx";
 	public static final String TPATH = "./docs/campaign_01_terrains.xlsx";
+	public static final String APATH = "./docs/campaign_01_adversaries.xlsx";
 	
 	public class Mission
 	{
@@ -189,6 +190,43 @@ public class Campaign {
         });
         
         list.add(terrain);
+        });
+		
+		return list;
+	}
+	
+	public class Attacker
+	{
+		public String aGroup;
+		public String tier;
+	}
+	
+	public ArrayList<Attacker> loadAttackers() throws Exception, IOException {
+		
+		Workbook workbook = WorkbookFactory.create(new File(APATH));
+		
+		Sheet sheet = workbook.getSheetAt(0);
+		DataFormatter dataFormatter = new DataFormatter();
+		int rowNum = 1;
+		int rowPosition = -10;
+		
+		ArrayList<Attacker> list = new ArrayList<Attacker>();
+
+		sheet.forEach(row -> {
+			Attacker attacker = new Attacker();
+			i = 0;
+            row.forEach(cell -> {
+                String cellValue = dataFormatter.formatCellValue(cell);
+
+                if(i == 0)
+            		attacker.aGroup = cellValue;
+                if(i == 1)
+        			attacker.tier   = cellValue;
+                
+            i = i + 1;
+        });
+        
+        list.add(attacker);
         });
 		
 		return list;

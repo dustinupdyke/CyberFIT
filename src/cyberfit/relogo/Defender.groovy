@@ -18,7 +18,7 @@ class Defender extends UserTurtle{
 	def expMissions = 0 // positive integer representing a force agent's total experience from industrial missions
 	def expTraining = 0 // positive integer representing a force agent's total experience from tactical missions
 	def lead = 0
-	def squad = 0 //0 - mp, 1 - network, 2 - hunt, 3 - hosts
+	def squad = 0 //1 - mp, 1 - network, 2 - hunt, 3 - hosts
 	def csa = [0,0] //Cyber Situational Awareness 2d array terrainid|status
 	def opStatus = 0 //0 = available, 1 = on training, 2 = on mission
 	
@@ -31,9 +31,10 @@ class Defender extends UserTurtle{
 		def iChance = random.nextInt(100)
 		
 		// every step, a defender might:
-		// a. do nothing
+		// a. do nothing -> ichance between 11 and 89
 				
-		// b. interact with another defender (create InteractionFF)		
+		// b. interact with another defender (create InteractionFF)
+		//during this interaction they might exchange CSA		
 		if(iChance > 89) {
 			def m = oneOf(defenders())
 			def i = createInteractionFFTo(m)
@@ -42,15 +43,19 @@ class Defender extends UserTurtle{
 			m.setColor(cyan())
 		}
 		
-		// c.interact with a terrain (create InteractionFT)
-		// c.interact with a terrain (create InteractionFT)
+		
+		
 		if(iChance < 11) {
-
+			
+			// c.interact with a terrain (create InteractionFT)
+			// during this FT interaction, it will be one of following type:
+			// Information Read, Information Write
+			// Operation Survey, Operation Edit, Operation Execute, Operation Develop, Operation Access
+			// Message Chat, Message Email, Message Report, Message Direct, Message Read
+			
 			def workstation = oneOf(terrains().with({type.equals(99)})) //connect me to a machine
 			def workstationLink = createInteractionFTTo(workstation)
-			workstation.setColor(blue())
-			// d.setColor(blue())
-			
+			workstation.setColor(blue())			
 			workstationLink.lifetime = random.nextInt(4)
 			workstationLink.color = blue()
 			

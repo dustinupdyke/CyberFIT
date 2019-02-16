@@ -23,7 +23,7 @@ class InteractionFT extends ReLogoLink {
 	}
 		
 	def step(){
-		if(lifetime == 0) {
+		if(lifetime <= 0) {
 			//this InteractionFT will die so
 			die()
 		}

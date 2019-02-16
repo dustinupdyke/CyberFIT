@@ -1,17 +1,13 @@
 package cyberfit.relogo;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-
-import org.apache.*;
 
 public class Campaign {
 
@@ -79,9 +75,11 @@ public class Campaign {
 	public class Soldier
 	{
 		public String team;
-		public String rank;
-		public String expMissions;
-		public String expTraining;
+		public String squad;
+		public String skill;
+		public String li;
+		public String ni;
+		public String hi;
 	}
 	
 	public ArrayList<Soldier> loadSoldiers() throws Exception, IOException {
@@ -92,8 +90,6 @@ public class Campaign {
 		
 		Sheet sheet = workbook.getSheetAt(0);
 		DataFormatter dataFormatter = new DataFormatter();
-		int rowNum = 1;
-		int rowPosition = -10;
 		
 		ArrayList<Soldier> list = new ArrayList<Soldier>();
 
@@ -105,12 +101,16 @@ public class Campaign {
 
                 if(i == 0)
             			soldier.team = cellValue;
-	            else if (i ==1)
-	            		soldier.rank = cellValue;
-	            else if(i ==2)
-	            		soldier.expMissions = cellValue;
+                else if(i == 1)
+                		soldier.squad = cellValue;
+	            else if(i == 2)
+	            		soldier.skill = cellValue;
 	            else if(i==3)
-	            		soldier.expTraining = cellValue;
+	            		soldier.li = cellValue;
+	            else if(i==4)
+	            		soldier.ni = cellValue;
+	            else if(i==5)
+	            		soldier.hi = cellValue;
             
             i = i + 1;
         });
@@ -135,8 +135,6 @@ public class Campaign {
 		
 		Sheet sheet = workbook.getSheetAt(0);
 		DataFormatter dataFormatter = new DataFormatter();
-		int rowNum = 1;
-		int rowPosition = -10;
 		
 		ArrayList<Friendly> list = new ArrayList<Friendly>();
 
@@ -170,8 +168,6 @@ public class Campaign {
 		
 		Sheet sheet = workbook.getSheetAt(0);
 		DataFormatter dataFormatter = new DataFormatter();
-		int rowNum = 1;
-		int rowPosition = -10;
 		
 		ArrayList<Terrain> list = new ArrayList<Terrain>();
 
@@ -207,8 +203,6 @@ public class Campaign {
 		
 		Sheet sheet = workbook.getSheetAt(0);
 		DataFormatter dataFormatter = new DataFormatter();
-		int rowNum = 1;
-		int rowPosition = -10;
 		
 		ArrayList<Attacker> list = new ArrayList<Attacker>();
 

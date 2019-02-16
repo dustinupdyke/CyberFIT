@@ -14,7 +14,7 @@ import repast.simphony.relogo.schedule.Setup
 class Attacker extends UserTurtle {
 	
 	def aGrup = 0 //id of group the adversary
-	def tier = 1 // 1 - 5 based on Defense Science Board Report, 5 being the most sophisticated
+	def tier = 1 // 1 - 6 based on Defense Science Board Report, 6 being the most sophisticated
 	
 	/* lockheed martin kill chain
 	 * 0 = not started
@@ -29,27 +29,28 @@ class Attacker extends UserTurtle {
 	def phase = 0 // 1-7 identifying which phase of kill chain agent is in
 	def phasetime = 0	
 	def attacks = [] //array of attacks available to the agent
+	def deliveredTo = [] //list of machines attacker delivered payload to
+	def recons = [] //list of machines attacker conducted recon on
 	def isPhaseSwitch = false
-	
-	
 	
 	// GEOFF: I think these chance numbers need to be clearly defined class variables 
 	// so that you can easily report on them, 
 	// otherwise, they are hard to track and understand
-	def chanceZeroDayCanBeDeveloped = 50000 //also must be tier = 5
-	def tierMultiplier = 20 * this.tier //of 100
 	
+	//tier 1 - attack 1 - 20
+	//tier 2 - attacks 1 - 40
+	//tier 3 - attacks 1 - 60
+	//tier 4 - attacks 1- 80
+	//tier 5 - attacks 1 - 99
+	//tier 6 - attacks 0 - 99
 	
+	def chanceZeroDayCanBeDeveloped = 50000 //also must be tier = 6
+	
+	//def tierMultiplier = 20 * this.tier //of 100
+	def tierMultiplier = 1
 	
 	def setup(){	
-		//initialize attacks - if tier = 5, give attacks 1 to 20(tier 1), 1 to 40(tier 2), 1 to 60(tier 3), 1 to 80(tier 4), 1 to 100(tier 5)
-		def attacks = random.nextInt(this.tierMultiplier)
-		def i = 0
-		i.upto(attacks) {
-			def attackNumber = random.nextInt(this.tierMultiplier)
-			this.attacks.add(attackNumber) 
-			print "Tier ${this.tier} team added attack ${attackNumber} (${this.tierMultiplier} multiplier)" 
-		}
+		
 	}
 
 	def step() {
@@ -58,6 +59,36 @@ class Attacker extends UserTurtle {
 		//case 0 means the attacker hasn't started, get random and if 50% or better, begin attack, this gives some random delay to starting	
 		
 			if(random.nextInt(100) > 50) {
+				
+				this.initialize()
+				
+				//print "Phase 0 this attacker has ${recons} and ${deliveredTo} and ${attacks}"
+				
+				tierMultiplier = 20 * tier.toInteger()
+				
+				if(tier == 6) {
+					tierMultiplier = 100
+				}
+				
+				def totalAttacks = 0
+				if(tier.toInteger() == 1) {
+					totalAttacks = 1
+				}else if(tier.toInteger() == 2) {
+					totalAttacks = 3
+				}else if(tier.toInteger() == 3) {
+					totalAttacks = 7
+				}else if(tier.toInteger() == 4) {
+					totalAttacks = 15
+				}else {
+					totalAttacks = 31
+				}
+				//print "this attacker wit tier ${tier} has ${totalAttacks} attacks available"
+				def i = 0
+				i.upto(totalAttacks) {
+					def attackNumber = random.nextInt(this.tierMultiplier)
+					this.attacks.add(attackNumber)
+					//print "Tier ${tier} attacker added attack ${attackNumber} (${tierMultiplier} multiplier)"
+				}
 				//proceed to phase 1
 				phase = 1
 				isPhaseSwitch = true
@@ -70,11 +101,14 @@ class Attacker extends UserTurtle {
 		 * every step, the attacker might create an interaction between their attacker machine and one of the terrain type 1 or 2
 		 * the phase should run, on average, 80 ticks
 		 * wait for at least 20 ticks before proceeding
-		 * */
+		 * */	
+		
+			//print "Recon Phase"	
 			if(phasetime < 1) {
 				phase = 2
 				isPhaseSwitch = true
 				phasetime = random.nextInt(100)
+				break
 			}
 			
 			if(random.nextInt(100) > 50) {
@@ -84,22 +118,66 @@ class Attacker extends UserTurtle {
 				def attackerWorkstation = oneOf(terrains().with({type.equals(66)})) //connect me to a machine
 				def attackerWorkstationLink = createInteractionFTTo(attackerWorkstation)
 				attackerWorkstationLink.lifetime = phasetime
-				attackerWorkstationLink.color = gray()
-				attackerWorkstation.setColor(gray())
+				//attackerWorkstationLink.color = gray()
+				//attackerWorkstation.setColor(gray())
 				
 				//now connect from that workstation out to a target machine in the battlespace
 				def target = oneOf(terrains().with({type.equals(1) || type.equals(2) || type.equals(3)}))
 				def attackerTargetLink = attackerWorkstation.createInteractionTTTo(target)
 				attackerTargetLink.lifetime = phasetime
-				attackerTargetLink.color = gray()
+				//attackerTargetLink.color = gray()
+				//print "adding ${target.who} to recons list ${recons}"
+				recons.add(target.who)
 				
-				this.setColor(gray())
+				//print "attacker is connected to machine with ${target.vulns} for ${phasetime}"
+				//print "vuln 1 is ${target.vulns[1]}"
+				//print "total vulns is ${target.vulns.size()}"
 				
-				//ZERO tier 5 teams will develop and deploy a custom zero-day vuln some percent of the time
-				if(this.tier > 4) {
+				if(target.vulns.size() > 0) {
+					
+					def vulReader = target.vulns[random.nextInt(target.vulns.size())]
+					
+					if(vulReader == 0) {
+						//print "zero day read"
+						break
+					}
+					//print "attacker found vul ${vulReader}"
+					//print "attacker is ${tier}"
+					//Now, add the vulnerability to the attacker's list of attacks
+					
+					if(tier.toInteger() == 1) {						
+						if(vulReader < 21){
+							//print "recon success attacker current attacks is ${attacks}###############"
+							attacks.add(vulReader)
+							//print "now is ${attacks}"
+						}
+					}else if(tier.toInteger() == 2) {
+						if(vulReader < 41){
+							attacks.add(vulReader)
+						}
+					}else if(tier.toInteger() == 3) {
+						if(vulReader < 61){
+							attacks.add(vulReader)
+						}
+					}else if(tier.toInteger() == 4) {
+						if(vulReader < 81){
+							attacks.add(vulReader)
+						}
+					}
+					else {
+						attacks.add(vulReader)
+					}
+					
+				}
+				
+				
+				//this.setColor(gray())
+				
+				//ZERO tier 6 teams will develop and deploy a custom zero-day vuln some percent of the time
+				if(this.tier > 5) {
 					def r = random.nextInt(chanceZeroDayCanBeDeveloped)
 					if(r < 1) {
-						print "Zero day developed (1 in ${chanceZeroDayCanBeDeveloped}"
+						//print "Zero day developed (1 in ${chanceZeroDayCanBeDeveloped}"
 						target.addZeroDay()
 					}
 				}
@@ -112,23 +190,32 @@ class Attacker extends UserTurtle {
 		 * phase should run on average 60 ticks
 		 * wait for at least 20 ticks before proceeding
 		 * */
+			//print "Weaponization Phase and phase time is ${phasetime}"
+			
 			if(phasetime < 1) {
 				phase = 3
 				isPhaseSwitch = true
 				phasetime = random.nextInt(100)
+				//print "break now"
+				break
 			}
+			
 			if(isPhaseSwitch) {
-				//print "Weaponizing"
-				
-				def attackerWorkstation = oneOf(terrains().with({type.equals(66)})) //connect me to a machine
-				attackerWorkstation.setColor(pink())
-				
-				def attackerWorkstationLink = createInteractionFTTo(attackerWorkstation)
-				attackerWorkstationLink.lifetime = phasetime
-				attackerWorkstationLink.color = pink()
-				
-				this.setColor(pink())
+			//print "Weaponizing Connection and recons size is ${recons.size()}"
+			//print "and recons is ${recons}"
+			
+			if(recons.size() <= 2) {
+				phase = 1
+				isPhaseSwitch = true
+				phasetime = random.nextInt(100)
+				break
 			}
+				
+			def attackerWorkstation = oneOf(terrains().with({type.equals(66)})) //connect me to a machine
+			def attackerWorkstationLink = createInteractionFTTo(attackerWorkstation)
+			attackerWorkstationLink.lifetime = phasetime
+			}
+			
 			
 			isPhaseSwitch = false
 			break
@@ -143,26 +230,81 @@ class Attacker extends UserTurtle {
 				phase = 4
 				isPhaseSwitch = true
 				phasetime = random.nextInt(100)
+				break
 			}
 			
 			if(isPhaseSwitch) {
-				//print "Delivering payload..."
+				
+				//print "this is 1 time Delivery Phase ps true"
+				
+				if(recons.size() < 2) {
+					phase = 1
+					isPhaseSwitch = true
+					phasetime = random.nextInt(100)
+					break
+				}
+				
+			}
+	   
+			if(random.nextInt(100) > 50) {
+				//print "Delivering payload..."				
+				//print "This attacker recon on ${recons}"
+				
+				//print "all terrains is ${terrains()}"
 				
 				def attackerWorkstation = oneOf(terrains().with({type.equals(66)})) //connect me to a machine
-				attackerWorkstation.setColor(magenta())
+				//attackerWorkstation.setColor(magenta())
+				
+				//print "aw is ${attackerWorkstation}"
 				
 				def attackerWorkstationLink = createInteractionFTTo(attackerWorkstation)
-				attackerWorkstationLink.lifetime = phasetime
-				attackerWorkstationLink.color = magenta()
 				
-				//now connect from that workstation out to a target machine in the battlespace
-				def attackedMachine = oneOf(terrains().with({type.equals(1) || type.equals(2) || type.equals(3)}))
-				attackedMachine.setColor(magenta())
+				//print "the link worked adn is ${attackerWorkstationLink}"
+				
+				attackerWorkstationLink.lifetime = 1
+				//attackerWorkstationLink.color = magenta()				
+				//now connect from that workstation out to a target machine in the battlespace that was recon'd on
+				if(recons.size() < 1) {
+					phase = 1
+					isPhaseSwitch = true
+					phasetime = random.nextInt(100)
+					break
+				}
+				
+				def deliveryRandom = random.nextInt(recons.size())
+				//print "dr is ${deliveryRandom} and recons at dr is ${recons[deliveryRandom]}"
+			
+				
+				if(recons[deliveryRandom] == null) {
+					break
+				}
+				
+				def deliverySelect = recons[deliveryRandom]
+				
+				//print "ds is ${deliverySelect}"
+				if(deliverySelect == null) {
+					break
+				}
+				def attackedMachine = terrain(deliverySelect)
 				def attackerTargetLink = attackerWorkstation.createInteractionTTTo(attackedMachine)
 				attackerTargetLink.lifetime = phasetime
-				attackerTargetLink.color = magenta()
-				
-				this.setColor(magenta())
+				def amNum = attackedMachine.who
+						
+				//attacker will load the attacked machine with one of its payloads
+				def payloadRandom = random.nextInt(attacks.size())
+				def payloadSelect = attacks[payloadRandom]
+				if(payloadSelect == null) {
+					break
+				}
+				attackedMachine.payloads.add(payloadSelect)
+				deliveredTo.add(attackedMachine.who)
+				/*print "payloads now are"
+				print attackedMachine.payloads
+				print "vulns now are"
+				print attackedMachine.vulns
+				print "delieverd to now"
+				print deliveredTo*/
+				//this.setColor(magenta())				
 			}
 			
 			isPhaseSwitch = false
@@ -178,7 +320,28 @@ class Attacker extends UserTurtle {
 		 * */
 			if(phasetime < 1) {
 				phase = 5
+				isPhaseSwitch = true
 				phasetime = random.nextInt(100)
+				break
+			}
+			//print "exploitation phase"
+			//print "now phase switch is ${isPhaseSwitch}"
+			if(isPhaseSwitch) {
+				
+				//print "delivered to size is ${deliveredTo.size()}"
+				def i = 0
+				i.upto(deliveredTo.size()) {
+					if(deliveredTo[i] != null) {
+						
+
+					//print "Exploitation attempt ${i} on ${deliveredTo[i]}"
+					
+					//print "try attack now"
+					terrain(deliveredTo[i]).tryAttack()
+					
+					i = i + 1
+					}
+				}
 			}
 			
 			isPhaseSwitch = false
@@ -190,7 +353,13 @@ class Attacker extends UserTurtle {
 		 */
 			if(phasetime < 1) {
 				phase = 6
+				isPhaseSwitch = true
 				phasetime = random.nextInt(100)
+				break
+			}
+			
+			if(isPhaseSwitch) {
+				//print "Command and Control Phase for ${phasetime} minutes"
 			}
 			
 			isPhaseSwitch = false
@@ -203,7 +372,14 @@ class Attacker extends UserTurtle {
 		 * */
 			if(phasetime < 1) {
 				phase = 0
+				isPhaseSwitch = true
 				phasetime = 0
+				break
+			}
+			
+			if(isPhaseSwitch) {
+				phasetime = phasetime + 180
+				//print "Actions on objectives phase for ${phasetime} minutes"
 			}
 			
 			isPhaseSwitch = false
@@ -212,9 +388,12 @@ class Attacker extends UserTurtle {
 	   
 	   if(phasetime > -1)
 		   phasetime = phasetime - 1
-		   
-		  
-	   
-	   //print "phase: " + phase + " | phasetime: " + phasetime
+		
+	}
+	
+	def initialize() {
+		this.attacks = []
+		this.recons = []
+		this.deliveredTo = []
 	}
 }

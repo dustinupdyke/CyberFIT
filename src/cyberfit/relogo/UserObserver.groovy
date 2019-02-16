@@ -11,6 +11,7 @@ import org.apache.poi.ss.usermodel.Sheet
 import org.apache.poi.ss.usermodel.Workbook
 import org.apache.poi.ss.usermodel.WorkbookFactory
 
+import repast.simphony.essentials.RepastEssentials
 import repast.simphony.relogo.Stop;
 import repast.simphony.relogo.Utility;
 import repast.simphony.relogo.UtilityG;
@@ -49,6 +50,10 @@ class UserObserver extends ReLogoObserver{
 		ask(attackers()) {
 			setup()
 		}
+		
+		ask(attackers()){
+			//print attacks
+		}
 	}
 	
 	@Go
@@ -84,9 +89,27 @@ class UserObserver extends ReLogoObserver{
 			step()
 		}
 		
-		//update 
+		ask(terrains()){
+			step()
+		}
 		
+		setPhase() 
 		
+	}
+	
+	def setPhase() {
+		
+		def tick = RepastEssentials.GetTickCount()
+		
+		if (tick == 100) {
+			ask(defenders()){
+				setPhase2()
+			}
+		}else if (tick == 200) {
+			ask(defenders()){
+				setPhase3()
+		}		
+		}
 	}
 	
 	def checkCPTsAssigned() {
@@ -104,12 +127,13 @@ class UserObserver extends ReLogoObserver{
 		Campaign c1 = new Campaign()
 		def missions = c1.loadMissions()
 		
+		def x = 10
 		def y = 10
 		
 		for(Campaign.Mission mission : missions) {
 			print "processing mission: ${mission.missionId}"
-			y=y+2
-			def x = 40
+			x = x + 2
+			y = y + 2
 			
 			def mID = mission.missionId
 			def numForces = mission.numFriendlyForces
@@ -121,12 +145,12 @@ class UserObserver extends ReLogoObserver{
 			def i = 0
 			i.upto(mission.numFriendlyForces.toInteger()) {
 				println "creating friendly ${i}"
-				createFriendlys(1){ [setxy(10+i,0), setColor(green()), missionId = mission.missionId] }
+				createFriendlys(1){ [setxy(x+i,y), setColor(green()), missionId = mission.missionId] }
 				i = i + 1				
 			 }
-			
-			 x = -20
-			 y = 10
+			 
+			 x = x + 2
+			 y = y + 2
 			 
 			 print "routers:"
 			 i = 0
@@ -136,8 +160,8 @@ class UserObserver extends ReLogoObserver{
 				 i = i+ 1
 			 }
 			 
-			 x = -20
-			 y = -10
+			 x = x + 2
+			 y = y + 2
 			 
 			 print "servers:"
 			 i = 0
@@ -147,8 +171,8 @@ class UserObserver extends ReLogoObserver{
 				 i = i+ 1
 			 }
 	
-			 x = 20
-			 y = 10
+			 x = x + 2
+			 y = y + 2
 			 
 			 print "client workstations:"
 			 i = 0
@@ -182,8 +206,8 @@ class UserObserver extends ReLogoObserver{
 				x = -50
 				y = y -2
 			}
-			createDefenders(1){ [setxy(x,y), setColor(green()), team = soldier.team, rank = soldier.rank, 
-				expMissions = soldier.expMissions, expTraining = soldier.expTraining ] }
+			createDefenders(1){ [setxy(x,y), setColor(green()), team = soldier.team, squad = soldier.squad, skill = soldier.skill, 
+				leadInt = soldier.li, networkInt = soldier.ni, hostsInt = soldier.hi] }
 			createTerrains(1){ [setxy(x+1,y+1), setColor(orange()), type = 99] }
 		}
 				
@@ -199,6 +223,7 @@ class UserObserver extends ReLogoObserver{
 		def y = -30
 		
 		for(Campaign.Attacker attacker : attackers) {
+			print "attacker group"
 			print attacker.aGroup
 			x = x+ 2
 			if(x == 10) {

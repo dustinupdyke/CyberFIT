@@ -15,6 +15,7 @@ class InteractionTT extends ReLogoLink {
 
 	//0 = die
 	def lifetime = 0
+	def type = 0 //0 - 
 	
 	@Setup
 	def setup(){
@@ -23,7 +24,7 @@ class InteractionTT extends ReLogoLink {
 	}
 		
 	def step(){
-		if(lifetime == 0) {
+		if(lifetime <= 0) {
 			//print "dead"
 			die()
 		}

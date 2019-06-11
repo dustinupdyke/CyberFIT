@@ -15,8 +15,14 @@ class Attacker extends UserTurtle {
 	
 	def aGrup = 0 //id of group the adversary
 	def tier = 1 // 1 - 6 based on Defense Science Board Report, 6 being the most sophisticated
+	def phase = 0 // 1-7 identifying which phase of kill chain agent is in
+	def phasetime = 0
+	def attacks = [] //array of attacks available to the agent
+	def deliveredTo = [] //list of machines attacker delivered payload to
+	def recons = [] //list of machines attacker conducted recon on
+	def isPhaseSwitch = false
 	
-	/* lockheed martin kill chain
+/* lockheed martin kill chain
 	 * 0 = not started
 	 * 1 = recon: connect to servers for random interval
 	 * 2 = weaponization: connect to nowhere
@@ -26,21 +32,11 @@ class Attacker extends UserTurtle {
 	 * 6 = actions
 	 * 7 = end
 	 * */
-	def phase = 0 // 1-7 identifying which phase of kill chain agent is in
-	def phasetime = 0	
-	def attacks = [] //array of attacks available to the agent
-	def deliveredTo = [] //list of machines attacker delivered payload to
-	def recons = [] //list of machines attacker conducted recon on
-	def isPhaseSwitch = false
-	
-	// GEOFF: I think these chance numbers need to be clearly defined class variables 
-	// so that you can easily report on them, 
-	// otherwise, they are hard to track and understand
 	
 	//tier 1 - attack 1 - 20
 	//tier 2 - attacks 1 - 40
 	//tier 3 - attacks 1 - 60
-	//tier 4 - attacks 1- 80
+	//tier 4 - attacks 1 - 80
 	//tier 5 - attacks 1 - 99
 	//tier 6 - attacks 0 - 99
 	
@@ -49,14 +45,14 @@ class Attacker extends UserTurtle {
 	//def tierMultiplier = 20 * this.tier //of 100
 	def tierMultiplier = 1
 	
-	def setup(){	
+	def setup(){
 		
 	}
 
 	def step() {
 	   switch (phase) {
-	    case 0:
-		//case 0 means the attacker hasn't started, get random and if 50% or better, begin attack, this gives some random delay to starting	
+		case 0:
+		//case 0 means the attacker hasn't started, get random and if 50% or better, begin attack, this gives some random delay to starting
 		
 			if(random.nextInt(100) > 50) {
 				
@@ -66,29 +62,42 @@ class Attacker extends UserTurtle {
 				
 				tierMultiplier = 20 * tier.toInteger()
 				
-				if(tier == 6) {
+				if(tier.toInteger() == 6) {
 					tierMultiplier = 100
 				}
 				
 				def totalAttacks = 0
 				if(tier.toInteger() == 1) {
-					totalAttacks = 1
+					totalAttacks = 0
 				}else if(tier.toInteger() == 2) {
-					totalAttacks = 3
+					totalAttacks = 1
 				}else if(tier.toInteger() == 3) {
-					totalAttacks = 7
+					totalAttacks = 3
 				}else if(tier.toInteger() == 4) {
-					totalAttacks = 15
+					totalAttacks = 7
 				}else {
-					totalAttacks = 31
+					totalAttacks = 15
 				}
-				//print "this attacker wit tier ${tier} has ${totalAttacks} attacks available"
+				//print "this attacker with tier ${tier} has ${totalAttacks} attacks available"
 				def i = 0
 				i.upto(totalAttacks) {
 					def attackNumber = random.nextInt(this.tierMultiplier)
+					
+					//check if attack is 0, if so, change to 1 so lower tier attackers don't have zero day avaialable
+					if(attackNumber == 0) {
+						attackNumber = 1
+					}
+					
 					this.attacks.add(attackNumber)
-					//print "Tier ${tier} attacker added attack ${attackNumber} (${tierMultiplier} multiplier)"
 				}
+				
+				//now if the attacker is phase 6 add zero day to its available attacks
+				if(tier.toInteger() == 6) {
+					this.attacks.add(0)
+				}
+				
+				print "Tier ${tier} attacker has these attacks ${attacks}"
+				
 				//proceed to phase 1
 				phase = 1
 				isPhaseSwitch = true
@@ -101,9 +110,9 @@ class Attacker extends UserTurtle {
 		 * every step, the attacker might create an interaction between their attacker machine and one of the terrain type 1 or 2
 		 * the phase should run, on average, 80 ticks
 		 * wait for at least 20 ticks before proceeding
-		 * */	
+		 * */
 		
-			//print "Recon Phase"	
+			//print "Recon Phase"
 			if(phasetime < 1) {
 				phase = 2
 				isPhaseSwitch = true
@@ -145,7 +154,7 @@ class Attacker extends UserTurtle {
 					//print "attacker is ${tier}"
 					//Now, add the vulnerability to the attacker's list of attacks
 					
-					if(tier.toInteger() == 1) {						
+					if(tier.toInteger() == 1) {
 						if(vulReader < 21){
 							//print "recon success attacker current attacks is ${attacks}###############"
 							attacks.add(vulReader)
@@ -221,7 +230,7 @@ class Attacker extends UserTurtle {
 			break
 		case 3:
 		/*this is delivery phase
-		 * attacker machine will target terrain by type (based on attack type) and create interaction, if that terrain has vul id of one of attacker 
+		 * attacker machine will target terrain by type (based on attack type) and create interaction, if that terrain has vul id of one of attacker
 		 * attack ids, then payload is delivered, and phase is over
 		 * phase should run average of 30 ticks
 		 * wait for at least 5 ticks before proceeding
@@ -247,7 +256,7 @@ class Attacker extends UserTurtle {
 			}
 	   
 			if(random.nextInt(100) > 50) {
-				//print "Delivering payload..."				
+				//print "Delivering payload..."
 				//print "This attacker recon on ${recons}"
 				
 				//print "all terrains is ${terrains()}"
@@ -262,7 +271,7 @@ class Attacker extends UserTurtle {
 				//print "the link worked adn is ${attackerWorkstationLink}"
 				
 				attackerWorkstationLink.lifetime = 1
-				//attackerWorkstationLink.color = magenta()				
+				//attackerWorkstationLink.color = magenta()
 				//now connect from that workstation out to a target machine in the battlespace that was recon'd on
 				if(recons.size() < 1) {
 					phase = 1
@@ -304,19 +313,19 @@ class Attacker extends UserTurtle {
 				print attackedMachine.vulns
 				print "delieverd to now"
 				print deliveredTo*/
-				//this.setColor(magenta())				
+				//this.setColor(magenta())
 			}
 			
 			isPhaseSwitch = false
 			break
 		case 4:
 		/*this is exploitation phase, where the attack must work
-		 * we already know that the attack matched the vulnerability during the delivery phase, but that specific vul might have been mitigated 
+		 * we already know that the attack matched the vulnerability during the delivery phase, but that specific vul might have been mitigated
 		 * during delivery or any tick since, so check again for a vul id on the terrain, and match to one of attack ids - if no match, go back
 		 * to phase 0, 1, or 2 (pick one randomly)
 		 * if a match exists between any of vul and attack ids, then the machine is exploited
 		 * set one or more of CIA to 0 and set isCompromised to true (on the terrain turtle)
-		 * 
+		 *
 		 * */
 			if(phasetime < 1) {
 				phase = 5
@@ -347,7 +356,7 @@ class Attacker extends UserTurtle {
 			isPhaseSwitch = false
 			break
 		case 5:
-		/*this is command and control phase where compromised terrain phones home or to malicious server, 
+		/*this is command and control phase where compromised terrain phones home or to malicious server,
 		 * create InteractionTT with the attacker machine
 		 * phase should run average of 20 ticks
 		 */
@@ -368,7 +377,7 @@ class Attacker extends UserTurtle {
 		/*this is actions on objectives phase
 		 * depending on attack type, the exploited machine will make InteractionTT with some other machines, for now, just
 		 * make random InteractionTT with other terrain, and set the lifespan of those IntaractionTTs to random value
-		 * phase should run average of 85 ticks 
+		 * phase should run average of 85 ticks
 		 * */
 			if(phasetime < 1) {
 				phase = 0

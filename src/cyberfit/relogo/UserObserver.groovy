@@ -40,26 +40,15 @@ class UserObserver extends ReLogoObserver{
 		setDefaultShape(Friendly,"person")
 		
 		loadBaseTerrain()
-		loadCPTs()		
+		loadCPTs()
 		loadAttackers()
-		
 		loadMissions()
-
-		assignCPTs()
-		
-		ask(attackers()) {
-			setup()
-		}
-		
-		ask(attackers()){
-			//print attacks
-		}
 	}
 	
 	@Go
 	def go(){
 	
-
+		//interactions
 		ask(interactionFTs()) {
 			step()
 		}
@@ -88,13 +77,10 @@ class UserObserver extends ReLogoObserver{
 		ask(friendlys()) {
 			step()
 		}
+		setPhase()
 		
-		ask(terrains()){
-			step()
-		}
-		
-		setPhase() 
-		
+		//then measure
+		updateMeasures()
 	}
 	
 	def setPhase() {
@@ -108,18 +94,21 @@ class UserObserver extends ReLogoObserver{
 		}else if (tick == 200) {
 			ask(defenders()){
 				setPhase3()
-		}		
+		}
 		}
 	}
 	
-	def checkCPTsAssigned() {
+	def updateMeasures() {
+		def t = 0
+		ask(terrains()){
+			t = t + vulns.size()
+		}
 		
-		if(team1Deploy == 'N' || team2Deploy == 'N' || team3Deploy == 'N' || team4Deploy == 'N') {
-			CPTsReady = 1
-		}
-		else {
-			CPTsReady = 1
-		}
+		//def c = 0
+		//c = terrains.count()
+		
+		print t
+		//print c
 	}
 	
 	def loadMissions() {
@@ -146,7 +135,7 @@ class UserObserver extends ReLogoObserver{
 			i.upto(mission.numFriendlyForces.toInteger()) {
 				println "creating friendly ${i}"
 				createFriendlys(1){ [setxy(x+i,y), setColor(green()), missionId = mission.missionId] }
-				i = i + 1				
+				i = i + 1
 			 }
 			 
 			 x = x + 2
@@ -186,10 +175,6 @@ class UserObserver extends ReLogoObserver{
 
 	}
 	
-	def assignCPTs() {
-		def xu = 1
-	}
-	
 	def loadCPTs() {
 		
 		Campaign c2 = new Campaign()
@@ -206,8 +191,9 @@ class UserObserver extends ReLogoObserver{
 				x = -50
 				y = y -2
 			}
-			createDefenders(1){ [setxy(x,y), setColor(green()), team = soldier.team, squad = soldier.squad, skill = soldier.skill, 
+			createDefenders(1){ [setxy(x,y), setColor(green()), team = soldier.team, squad = soldier.squad, skill = soldier.skill,
 				leadInt = soldier.li, networkInt = soldier.ni, hostsInt = soldier.hi] }
+			
 			createTerrains(1){ [setxy(x+1,y+1), setColor(orange()), type = 99] }
 		}
 				
@@ -233,7 +219,7 @@ class UserObserver extends ReLogoObserver{
 			
 			createAttackers(1){ [setxy(x,y), setColor(red()), tier = attacker.tier] }
 			createTerrains(1){ [setxy(x+1,y+1), setColor(pink()), type = 66] }
-		}	
+		}
 				
 }
 	
@@ -244,18 +230,13 @@ class UserObserver extends ReLogoObserver{
 		createTerrains(1){ [setxy(-10,2), setColor(brown()), type = 1] }
 		createTerrains(1){ [setxy(-10,3), setColor(brown()), type = 1] }
 		createTerrains(1){ [setxy(-10,4), setColor(brown()), type = 1] }
-		
-		//Create Routers (type 1)
+		createTerrains(1){ [setxy(-10,5), setColor(brown()), type = 1] }
+	
 		createTerrains(1){ [setxy(-9,1), setColor(brown()), type = 1] }
 		createTerrains(1){ [setxy(-9,2), setColor(brown()), type = 1] }
 		createTerrains(1){ [setxy(-9,3), setColor(brown()), type = 1] }
 		createTerrains(1){ [setxy(-9,4), setColor(brown()), type = 1] }
-				
-		//Create Routers (type 1)
-		createTerrains(1){ [setxy(-8,1), setColor(brown()), type = 1] }
-		createTerrains(1){ [setxy(-8,2), setColor(brown()), type = 1] }
-		createTerrains(1){ [setxy(-8,3), setColor(brown()), type = 1] }
-		createTerrains(1){ [setxy(-8,4), setColor(brown()), type = 1] }
+		createTerrains(1){ [setxy(-9,5), setColor(brown()), type = 1] }
 		
 		//Create Servers (type 2)
 		createTerrains(1){ [setxy(-7,-6), setColor(brown()), type = 2] }
@@ -268,9 +249,17 @@ class UserObserver extends ReLogoObserver{
 		createTerrains(1){ [setxy(-7,1), setColor(brown()), type = 2] }
 		createTerrains(1){ [setxy(-7,2), setColor(brown()), type = 2] }
 		createTerrains(1){ [setxy(-7,3), setColor(brown()), type = 2] }
+
 		createTerrains(1){ [setxy(-7,4), setColor(brown()), type = 2] }
 		createTerrains(1){ [setxy(-7,5), setColor(brown()), type = 2] }
 		createTerrains(1){ [setxy(-7,6), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(-7,7), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(-7,8), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(-7,9), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(-7,10), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(-7,11), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(-7,12), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(-7,13), setColor(brown()), type = 2] }
 		
 		//Create Clients (type 3)
 		createTerrains(1){ [setxy(-6,-6), setColor(brown()), type = 3] }
@@ -286,8 +275,9 @@ class UserObserver extends ReLogoObserver{
 		createTerrains(1){ [setxy(-6,4), setColor(brown()), type = 3] }
 		createTerrains(1){ [setxy(-6,5), setColor(brown()), type = 3] }
 		createTerrains(1){ [setxy(-6,6), setColor(brown()), type = 3] }
+		createTerrains(1){ [setxy(-6,7), setColor(brown()), type = 3] }
+		createTerrains(1){ [setxy(-6,8), setColor(brown()), type = 3] }
 		
-		//Create Clients (type 3)
 		createTerrains(1){ [setxy(-5,-6), setColor(brown()), type = 3] }
 		createTerrains(1){ [setxy(-5,-5), setColor(brown()), type = 3] }
 		createTerrains(1){ [setxy(-5,-4), setColor(brown()), type = 3] }
@@ -301,6 +291,8 @@ class UserObserver extends ReLogoObserver{
 		createTerrains(1){ [setxy(-5,4), setColor(brown()), type = 3] }
 		createTerrains(1){ [setxy(-5,5), setColor(brown()), type = 3] }
 		createTerrains(1){ [setxy(-5,6), setColor(brown()), type = 3] }
+		createTerrains(1){ [setxy(-5,7), setColor(brown()), type = 3] }
+		createTerrains(1){ [setxy(-5,8), setColor(brown()), type = 3] }
 		
 	}
 	
@@ -312,68 +304,7 @@ class UserObserver extends ReLogoObserver{
 			createTerrains(1){ [setxy(-20,i), setColor(brown()), type = 1] }
 		}
 		
-		//Create Routers (type 1)
-		createTerrains(1){ [setxy(-10,1), setColor(brown()), type = 1] }
-		createTerrains(1){ [setxy(-10,2), setColor(brown()), type = 1] }
-		createTerrains(1){ [setxy(-10,3), setColor(brown()), type = 1] }
-		createTerrains(1){ [setxy(-10,4), setColor(brown()), type = 1] }
 		
-		//Create Routers (type 1)
-		createTerrains(1){ [setxy(-9,1), setColor(brown()), type = 1] }
-		createTerrains(1){ [setxy(-9,2), setColor(brown()), type = 1] }
-		createTerrains(1){ [setxy(-9,3), setColor(brown()), type = 1] }
-		createTerrains(1){ [setxy(-9,4), setColor(brown()), type = 1] }
-				
-		//Create Routers (type 1)
-		createTerrains(1){ [setxy(-8,1), setColor(brown()), type = 1] }
-		createTerrains(1){ [setxy(-8,2), setColor(brown()), type = 1] }
-		createTerrains(1){ [setxy(-8,3), setColor(brown()), type = 1] }
-		createTerrains(1){ [setxy(-8,4), setColor(brown()), type = 1] }
-		
-		//Create Servers (type 2)
-		createTerrains(1){ [setxy(-7,-6), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,-5), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,-4), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,-3), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,-2), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,-1), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,0), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,1), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,2), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,3), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,4), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,5), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,6), setColor(brown()), type = 2] }
-		
-		//Create Clients (type 3)
-		createTerrains(1){ [setxy(-6,-6), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,-5), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,-4), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,-3), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,-2), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,-1), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,0), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,1), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,2), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,3), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,4), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,5), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,6), setColor(brown()), type = 3] }
-		
-		//Create Clients (type 3)
-		createTerrains(1){ [setxy(-5,-6), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,-5), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,-4), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,-3), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,-2), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,-1), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,0), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,1), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,2), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,3), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,4), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,5), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,6), setColor(brown()), type = 3] }
 		
 	}
 	

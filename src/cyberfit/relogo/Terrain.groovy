@@ -14,19 +14,38 @@ import repast.simphony.relogo.schedule.Setup
 class Terrain extends UserTurtle {
 
 	def status = 0 // 0 - ok, 1 - compromised
-	def type = 1 //1 - routing, 2 - server, 3 - client, 66 = attacker workstation, 99 = defender workstation
+	def type = 1 //1 - routing, 2 - server, 3 - client
 	def vulns = [] //array of vulnerability ids
 	def payloads = []
 	def missionsSupported = []
+	def compromisePayload = 0
+	
+	def totalComps = 0
+	def totalCompTime = 0
 
 	def setup(){
+		
+		totalComps = 0
+		totalCompTime = 0
 	}
 	
 	def step() {
 		generateVulns()
 		setTerrainColor()
+		updateTerrainStats()
 	}
 	
+	def getTerrainStatus() {
+		return status
+	}
+
+	def updateTerrainStats() {
+		if(status == 1){
+			//print "this is ${who} and has total comp time ${totalCompTime} and total comps ${totalComps}###################################"
+			totalCompTime = totalCompTime + 1
+		}
+		
+	}
 	def setTerrainColor() {
 		
 		this.color = green()
@@ -37,19 +56,19 @@ class Terrain extends UserTurtle {
 	
 	def generateVulns() {
 		
-		/* 
+		/*
 		 * every step, terrain might grow a vulnerability, all possible vulnerabilities represented by integers 1 - 100
 		 * the vulnerability id represents how serious it is - ie 1 is the simplest and 100 the most complicated/severe
 		 * vulnerabilities can be exploited by attacker tier:
 		 *
-		 * tier 1: 80 - 99 
-		 * tier 2: 60 - 99
-		 * tier 3: 40 - 99
-		 * tier 4: 20 - 99
+		 * tier 1: 1 - 20
+		 * tier 2: 1 - 40
+		 * tier 3: 1 - 60
+		 * tier 4: 1 - 80
 		 * tier 5: 1 - 99
 		 * tier 6: 0 - 99
-		 * 
-		 * vulnerabilities grow at a rate relative to their tier level, 
+		 *
+		 * vulnerabilities grow at a rate relative to their tier level,
 		 * so tier 1 vulnerabilities are much more likely to occur than tier 2, 3, etc
 		 *
 		 */
@@ -58,7 +77,7 @@ class Terrain extends UserTurtle {
 		r = random.nextInt(1000)
 		
 		//??% of the time, there is a new vuln
-		if(r < 20) {  
+		if(r < 10) {
 			// vuln occurred, get random r2 between 0 - 29, add to vuln array
 			r = random.nextInt(100)
 			
@@ -69,20 +88,12 @@ class Terrain extends UserTurtle {
 			}
 		}
 	
-		//also, terrain might grow a zero day, at any given time		
-		//get random r3 between 1 and 200, if r3 < 2, add 0 to vuln array 
-		r = random.nextInt(20000)
-		if(r < 1) {
-			vulns.add(0)
-			//print "Zero day has occured ${r}"
-			this.setColor(red())
-		}
 	}
 	
 	def addZeroDay() {
 		this.vulns.add(0)
 		//print "Tier 6 team has deployed a zero day"
-		this.setColor(red())
+		//this.setColor(red())
 	}
 	
 	def public void sendMessage() {
@@ -95,30 +106,70 @@ class Terrain extends UserTurtle {
 		
 	}
 	
-	def public int trySurvey() {
-		
+	def public int trySurvey(int squad) {
+		def terrainToSurvey
 		//print "trying Survey"
-				
-		def terrainToSurvey = oneOf(terrains().with({type.equals(3)}))
-		def operationLink = createInteractionTTTo(terrainToSurvey)
-		operationLink.lifetime = 1 //need to decide stochastic later
-		
+		if(squad == 2) {
+			terrainToSurvey = oneOf(terrains().with({type.equals(1) || type.equals(2)}))
+			def operationLink = createInteractionTTTo(terrainToSurvey)
+			operationLink.lifetime = 1 //need to decide stochastic later
+		}else {
+			terrainToSurvey = oneOf(terrains().with({type.equals(2) || type.equals(3)}))
+			def operationLink = createInteractionTTTo(terrainToSurvey)
+			operationLink.lifetime = 1 //need to decide stochastic later
+		}
 		if (terrainToSurvey.status == 1) {
-			return -1
+			return -1*terrainToSurvey.who
 		}
 		
 		return terrainToSurvey.who
 	}
 	
-	def public int trySecure() {
+	def public int trySecure(int squad) {
 		
 		//print "tyring secure"
+		if(squad == 2) {
+			def terrainToSecure = oneOf(terrains().with({type.equals(1) || type.equals(2)}))
+			def operationLink = createInteractionTTTo(terrainToSecure)
+			operationLink.lifetime = 1 //need to decide stochastic later
+			return terrainToSecure.who
+		}else {
+			def terrainToSecure = oneOf(terrains().with({type.equals(2) || type.equals(3)}))
+			def operationLink = createInteractionTTTo(terrainToSecure)
+			operationLink.lifetime = 1 //need to decide stochastic later
+		}
+
+	}
+	
+	def public boolean tryRestore(int id, String skill) {
 		
-		def terrainToSecure = oneOf(terrains().with({type.equals(3)}))
-		def operationLink = createInteractionTTTo(terrainToSecure)
+		def terrainToRestore = terrain(id)
+		def operationLink = createInteractionTTTo(terrainToRestore)
 		operationLink.lifetime = 1 //need to decide stochastic later
+		//print "try restore on ${terrainToRestore}"
 		
-		return terrainToSecure.who
+		def restoralChance = random.nextInt(100)
+		if (skill == 1) {
+			if(restoralChance == 0) {
+				terrainToRestore.status = 0
+				//print "terrain restored"
+				return true
+			}
+		}else if(skill == 2) {
+			if(restoralChance < 5) {
+				terrainToRestore.status = 0
+				//print "terrain restored"
+				return true
+			}
+		}else {
+			if(restoralChance < 10) {
+				terrainToRestore.status = 0
+				//print "terrain restored"
+				return true
+			}
+		}
+		
+		return false
 	}
 	
 	def public void tryAttack() {
@@ -127,7 +178,7 @@ class Terrain extends UserTurtle {
 		//print "this machine payloads ${payloads}"
 		def i = 0
 				
-		i.upto(vulns.size()){			
+		i.upto(vulns.size()){
 			if(vulns[i] != null) {
 			def j = 0
 			
@@ -137,11 +188,13 @@ class Terrain extends UserTurtle {
 				if(payloads[j] != null) {
 					if(payloads[j].toInteger() == vulns[i].toInteger()) {
 						status = 1
+						compromisePayload = payloads[j].toInteger()
 						//print "terrain ${this.who} is now compromised"
 						
-						def u = this.who 
-						
-						//print "a compromise occurred on ${u} BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+						def u = this.who
+						totalComps = totalComps + 1
+						//print "this terrain ${who} has total of ${totalComps} BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+						//print "a compromise occurred on ${u}"
 					}
 					//print "this is current payload ${payloads[j]} and current vuln ${vulns[i]}"
 					

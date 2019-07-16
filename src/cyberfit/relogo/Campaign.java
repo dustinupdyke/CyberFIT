@@ -17,6 +17,8 @@ public class Campaign {
 	public static final String TPATH = "./docs/campaign_01_terrains.xlsx";
 	public static final String APATH = "./docs/campaign_01_adversaries.xlsx";
 	
+	public int m0Comps = 0;
+	
 	public class Mission
 	{
 		public String missionId;
@@ -77,9 +79,6 @@ public class Campaign {
 		public String team;
 		public String squad;
 		public String skill;
-		public String li;
-		public String ni;
-		public String hi;
 	}
 	
 	public ArrayList<Soldier> loadSoldiers() throws Exception, IOException {
@@ -105,12 +104,6 @@ public class Campaign {
                 		soldier.squad = cellValue;
 	            else if(i == 2)
 	            		soldier.skill = cellValue;
-	            else if(i==3)
-	            		soldier.li = cellValue;
-	            else if(i==4)
-	            		soldier.ni = cellValue;
-	            else if(i==5)
-	            		soldier.hi = cellValue;
             
             i = i + 1;
         });

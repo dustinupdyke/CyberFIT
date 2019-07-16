@@ -11,5 +11,10 @@ import repast.simphony.relogo.schedule.Setup;
 import cyberfit.ReLogoPatch;
 
 class UserPatch extends ReLogoPatch{
-
+	
+	def recolorPatch(){
+		//pcolor = scaleColor(green(),zombieSignal,0.01, 1)
+		//pcolor = white()
+		pcolor = 121
+	}
 }

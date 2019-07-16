@@ -96,7 +96,7 @@ class Attacker extends UserTurtle {
 					this.attacks.add(0)
 				}
 				
-				print "Tier ${tier} attacker has these attacks ${attacks}"
+				//print "Tier ${tier} attacker has these attacks ${attacks}"
 				
 				//proceed to phase 1
 				phase = 1
@@ -124,14 +124,14 @@ class Attacker extends UserTurtle {
 				//print "Recon connection"
 				
 				//get on an attacker workstation
-				def attackerWorkstation = oneOf(terrains().with({type.equals(66)})) //connect me to a machine
+				def attackerWorkstation = oneOf(terrains().with({t_type.equals(66)})) //connect me to a machine
 				def attackerWorkstationLink = createInteractionFTTo(attackerWorkstation)
 				attackerWorkstationLink.lifetime = phasetime
 				//attackerWorkstationLink.color = gray()
 				//attackerWorkstation.setColor(gray())
 				
 				//now connect from that workstation out to a target machine in the battlespace
-				def target = oneOf(terrains().with({type.equals(1) || type.equals(2) || type.equals(3)}))
+				def target = oneOf(terrains().with({t_type.equals(1) || t_type.equals(2) || t_type.equals(3)}))
 				def attackerTargetLink = attackerWorkstation.createInteractionTTTo(target)
 				attackerTargetLink.lifetime = phasetime
 				//attackerTargetLink.color = gray()
@@ -199,7 +199,7 @@ class Attacker extends UserTurtle {
 		 * phase should run on average 60 ticks
 		 * wait for at least 20 ticks before proceeding
 		 * */
-			//print "Weaponization Phase and phase time is ${phasetime}"
+			//print "Weaponization Phase and my recons are ${recons}"
 			
 			if(phasetime < 1) {
 				phase = 3
@@ -220,7 +220,7 @@ class Attacker extends UserTurtle {
 				break
 			}
 				
-			def attackerWorkstation = oneOf(terrains().with({type.equals(66)})) //connect me to a machine
+			def attackerWorkstation = oneOf(terrains().with({t_type.equals(66)})) //connect me to a machine
 			def attackerWorkstationLink = createInteractionFTTo(attackerWorkstation)
 			attackerWorkstationLink.lifetime = phasetime
 			}
@@ -257,18 +257,11 @@ class Attacker extends UserTurtle {
 	   
 			if(random.nextInt(100) > 50) {
 				//print "Delivering payload..."
-				//print "This attacker recon on ${recons}"
 				
-				//print "all terrains is ${terrains()}"
-				
-				def attackerWorkstation = oneOf(terrains().with({type.equals(66)})) //connect me to a machine
+				def attackerWorkstation = oneOf(terrains().with({t_type.equals(66)})) //connect me to a machine
 				//attackerWorkstation.setColor(magenta())
 				
-				//print "aw is ${attackerWorkstation}"
-				
 				def attackerWorkstationLink = createInteractionFTTo(attackerWorkstation)
-				
-				//print "the link worked adn is ${attackerWorkstationLink}"
 				
 				attackerWorkstationLink.lifetime = 1
 				//attackerWorkstationLink.color = magenta()
@@ -305,8 +298,16 @@ class Attacker extends UserTurtle {
 				if(payloadSelect == null) {
 					break
 				}
-				attackedMachine.payloads.add(payloadSelect)
-				deliveredTo.add(attackedMachine.who)
+				
+				//check to see if already delivered to
+				if(!deliveredTo.contains(attackedMachine.who)) {
+					//print "didnt deliver so delivering ***************************"
+					attackedMachine.payloads.add(payloadSelect)
+					deliveredTo.add(attackedMachine.who)
+				}else {
+					//print "Already delivered to that one &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+				}
+				
 				/*print "payloads now are"
 				print attackedMachine.payloads
 				print "vulns now are"
@@ -333,22 +334,20 @@ class Attacker extends UserTurtle {
 				phasetime = random.nextInt(100)
 				break
 			}
-			//print "exploitation phase"
+			
 			//print "now phase switch is ${isPhaseSwitch}"
 			if(isPhaseSwitch) {
-				
-				//print "delivered to size is ${deliveredTo.size()}"
+				//print "delivered to size is ${deliveredTo.size()} and delivered to is ${deliveredTo}"
 				def i = 0
 				i.upto(deliveredTo.size()) {
 					if(deliveredTo[i] != null) {
-						
-
-					//print "Exploitation attempt ${i} on ${deliveredTo[i]}"
-					
-					//print "try attack now"
-					terrain(deliveredTo[i]).tryAttack()
-					
-					i = i + 1
+					//	print "Exploitation attempt ${i} on ${deliveredTo[i]} by ${who}"
+						if(terrain(deliveredTo[i]).status == 0) {
+							terrain(deliveredTo[i]).tryAttack()
+						}else {
+							print "that's already compromised bro"
+						}
+						i = i + 1
 					}
 				}
 			}

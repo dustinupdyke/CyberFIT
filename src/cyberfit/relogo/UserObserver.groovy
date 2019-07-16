@@ -21,10 +21,11 @@ import cyberfit.ReLogoObserver;
 
 class UserObserver extends ReLogoObserver{
 
-	public static final String MPATH = "./docs/campaign_01_missions.xlsx";
-	public static final String CPATH = "./docs/campaign_01_CPTs.xlsx";
+	//public static final String MPATH = "./docs/campaign_01_missions.xlsx";
+	//public static final String CPATH = "./docs/campaign_01_CPTs.xlsx";
 	
 	public numTerrains = []
+	//def obs_m0Comps = 0
 	
 	@Setup
 	def setup(){
@@ -48,6 +49,10 @@ class UserObserver extends ReLogoObserver{
 	@Go
 	def go(){
 	
+		ask (patches()){
+			recolorPatch()
+		}
+		
 		//interactions
 		ask(interactionFTs()) {
 			step()
@@ -80,21 +85,27 @@ class UserObserver extends ReLogoObserver{
 		setPhase()
 		
 		//then measure
-		updateMeasures()
+		//updateMeasures()
+		
+		ask(defenders()){
+			cleanUpCompromiseSA()
+		}
+		
+		//print "mission 0 has ${obs_m0Comps} compromises"
 	}
 	
 	def setPhase() {
 		
 		def tick = RepastEssentials.GetTickCount()
 		
-		if (tick == 100) {
+		if (tick == 120) {
 			ask(defenders()){
 				setPhase2()
 			}
-		}else if (tick == 200) {
+		}else if (tick == 240) {
 			ask(defenders()){
 				setPhase3()
-		}
+			}
 		}
 	}
 	
@@ -104,11 +115,32 @@ class UserObserver extends ReLogoObserver{
 			t = t + vulns.size()
 		}
 		
-		//def c = 0
-		//c = terrains.count()
+		def n = 0
+		ask(defenders()){
+			n = n + totalNothings
+		}
+		print "total nothings is ${n}"
+	
+	//	def rs = 0
+		//ask(defenders()){
+			//rs = rs + totalRestoralSuccessOps
+		//}
 		
-		print t
-		//print c
+		//def rf = 0
+		//ask(defenders()){
+			//rf = rf + totalRestoralFailOps
+		//}
+		
+	//	def tempCompCount = 0
+		//ask(terrains()){
+			//if(missionID == 0) {
+				//tempCompCount = tempCompCount + totalComps
+			//}
+		//}
+		
+		//obs_m0Comps = obs_m0Comps + tempCompCount
+		
+		
 	}
 	
 	def loadMissions() {
@@ -145,7 +177,7 @@ class UserObserver extends ReLogoObserver{
 			 i = 0
 			 i.upto(mission.numTerrainT1.toInteger()) {
 				 println "creating router ${i}"
-				 createTerrains(1){ [setxy(x+i,y), setColor(brown()), missionsSupported.add(mission.missionId), type=1]}
+				 createTerrains(1){ [setxy(x+i,y), setColor(brown()), missionsSupported.add(mission.missionId), missionID = mission.missionId, t_type=1]}
 				 i = i+ 1
 			 }
 			 
@@ -156,7 +188,7 @@ class UserObserver extends ReLogoObserver{
 			 i = 0
 			 i.upto(mission.numTerrainT2.toInteger()) {
 				 println "creating server ${i}"
-				 createTerrains(1){ [setxy(x+i,y), setColor(brown()), missionsSupported.add(mission.missionId), type=2]}
+				 createTerrains(1){ [setxy(x+i,y), setColor(brown()), missionsSupported.add(mission.missionId), missionID = mission.missionId, t_type=2]}
 				 i = i+ 1
 			 }
 	
@@ -167,7 +199,7 @@ class UserObserver extends ReLogoObserver{
 			 i = 0
 			 i.upto(mission.numTerrainT3.toInteger()) {
 				 println "creating workstation ${i}"
-				 createTerrains(1){ [setxy(x+i,y), setColor(brown()), missionsSupported.add(mission.missionId), type=3]}
+				 createTerrains(1){ [setxy(x+i,y), setColor(brown()), missionsSupported.add(mission.missionId), missionID = mission.missionId, t_type=3]}
 				 i = i+ 1
 			 }
 		}
@@ -191,10 +223,9 @@ class UserObserver extends ReLogoObserver{
 				x = -50
 				y = y -2
 			}
-			createDefenders(1){ [setxy(x,y), setColor(green()), team = soldier.team, squad = soldier.squad, skill = soldier.skill,
-				leadInt = soldier.li, networkInt = soldier.ni, hostsInt = soldier.hi] }
+			createDefenders(1){ [setxy(x,y), setColor(green()), team = soldier.team, squad = soldier.squad, skill = soldier.skill] }
 			
-			createTerrains(1){ [setxy(x+1,y+1), setColor(orange()), type = 99] }
+			createTerrains(1){ [setxy(x+1,y+1), setColor(orange()), t_type = 99] }
 		}
 				
 	}
@@ -218,93 +249,81 @@ class UserObserver extends ReLogoObserver{
 			}
 			
 			createAttackers(1){ [setxy(x,y), setColor(red()), tier = attacker.tier] }
-			createTerrains(1){ [setxy(x+1,y+1), setColor(pink()), type = 66] }
+			createTerrains(1){ [setxy(x+1,y+1), setColor(pink()), t_type = 66] }
 		}
 				
-}
+	}
 	
 	def loadBaseTerrain(){
 		
 		//Create Routers (type 1)
-		createTerrains(1){ [setxy(-10,1), setColor(brown()), type = 1] }
-		createTerrains(1){ [setxy(-10,2), setColor(brown()), type = 1] }
-		createTerrains(1){ [setxy(-10,3), setColor(brown()), type = 1] }
-		createTerrains(1){ [setxy(-10,4), setColor(brown()), type = 1] }
-		createTerrains(1){ [setxy(-10,5), setColor(brown()), type = 1] }
+		createTerrains(1){ [setxy(-10,1), setColor(brown()), t_type = 1, missionID = 0] }
+		createTerrains(1){ [setxy(-10,2), setColor(brown()), t_type = 1, missionID = 0] }
+		createTerrains(1){ [setxy(-10,3), setColor(brown()), t_type = 1, missionID = 0] }
+		createTerrains(1){ [setxy(-10,4), setColor(brown()), t_type = 1, missionID = 0] }
+		createTerrains(1){ [setxy(-10,5), setColor(brown()), t_type = 1, missionID = 0] }
 	
-		createTerrains(1){ [setxy(-9,1), setColor(brown()), type = 1] }
-		createTerrains(1){ [setxy(-9,2), setColor(brown()), type = 1] }
-		createTerrains(1){ [setxy(-9,3), setColor(brown()), type = 1] }
-		createTerrains(1){ [setxy(-9,4), setColor(brown()), type = 1] }
-		createTerrains(1){ [setxy(-9,5), setColor(brown()), type = 1] }
+		createTerrains(1){ [setxy(-9,1), setColor(brown()), t_type = 1, missionID = 0] }
+		createTerrains(1){ [setxy(-9,2), setColor(brown()), t_type = 1, missionID = 0] }
+		createTerrains(1){ [setxy(-9,3), setColor(brown()), t_type = 1, missionID = 0] }
+		createTerrains(1){ [setxy(-9,4), setColor(brown()), t_type = 1, missionID = 0] }
+		createTerrains(1){ [setxy(-9,5), setColor(brown()), t_type = 1, missionID = 0] }
 		
-		//Create Servers (type 2)
-		createTerrains(1){ [setxy(-7,-6), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,-5), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,-4), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,-3), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,-2), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,-1), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,0), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,1), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,2), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,3), setColor(brown()), type = 2] }
+		//Create Servers (t_type 2)
+		createTerrains(1){ [setxy(-7,-6), setColor(brown()), t_type = 2, missionID = 0] }
+		createTerrains(1){ [setxy(-7,-5), setColor(brown()), t_type = 2, missionID = 0] }
+		createTerrains(1){ [setxy(-7,-4), setColor(brown()), t_type = 2, missionID = 0] }
+		createTerrains(1){ [setxy(-7,-3), setColor(brown()), t_type = 2, missionID = 0] }
+		createTerrains(1){ [setxy(-7,-2), setColor(brown()), t_type = 2, missionID = 0] }
+		createTerrains(1){ [setxy(-7,-1), setColor(brown()), t_type = 2, missionID = 0] }
+		createTerrains(1){ [setxy(-7,0), setColor(brown()), t_type = 2, missionID = 0] }
+		createTerrains(1){ [setxy(-7,1), setColor(brown()), t_type = 2, missionID = 0] }
+		createTerrains(1){ [setxy(-7,2), setColor(brown()), t_type = 2, missionID = 0] }
+		createTerrains(1){ [setxy(-7,3), setColor(brown()), t_type = 2, missionID = 0] }
 
-		createTerrains(1){ [setxy(-7,4), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,5), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,6), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,7), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,8), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,9), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,10), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,11), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,12), setColor(brown()), type = 2] }
-		createTerrains(1){ [setxy(-7,13), setColor(brown()), type = 2] }
+		createTerrains(1){ [setxy(-7,4), setColor(brown()), t_type = 2, missionID = 0] }
+		createTerrains(1){ [setxy(-7,5), setColor(brown()), t_type = 2, missionID = 0] }
+		createTerrains(1){ [setxy(-7,6), setColor(brown()), t_type = 2, missionID = 0] }
+		createTerrains(1){ [setxy(-7,7), setColor(brown()), t_type = 2, missionID = 0] }
+		createTerrains(1){ [setxy(-7,8), setColor(brown()), t_type = 2, missionID = 0] }
+		createTerrains(1){ [setxy(-7,9), setColor(brown()), t_type = 2, missionID = 0] }
+		createTerrains(1){ [setxy(-7,10), setColor(brown()), t_type = 2, missionID = 0] }
+		createTerrains(1){ [setxy(-7,11), setColor(brown()), t_type = 2, missionID = 0] }
+		createTerrains(1){ [setxy(-7,12), setColor(brown()), t_type = 2, missionID = 0] }
+		createTerrains(1){ [setxy(-7,13), setColor(brown()), t_type = 2, missionID = 0] }
 		
-		//Create Clients (type 3)
-		createTerrains(1){ [setxy(-6,-6), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,-5), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,-4), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,-3), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,-2), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,-1), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,0), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,1), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,2), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,3), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,4), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,5), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,6), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,7), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-6,8), setColor(brown()), type = 3] }
+		//Create Clients (t_type 3)
+		createTerrains(1){ [setxy(-6,-6), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-6,-5), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-6,-4), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-6,-3), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-6,-2), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-6,-1), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-6,0), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-6,1), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-6,2), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-6,3), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-6,4), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-6,5), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-6,6), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-6,7), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-6,8), setColor(brown()), t_type = 3, missionID = 0] }
 		
-		createTerrains(1){ [setxy(-5,-6), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,-5), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,-4), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,-3), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,-2), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,-1), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,0), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,1), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,2), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,3), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,4), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,5), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,6), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,7), setColor(brown()), type = 3] }
-		createTerrains(1){ [setxy(-5,8), setColor(brown()), type = 3] }
-		
-	}
-	
-	def loadBaseTerrain_Loop(){
-		
-		def i = 10
-		while(i>0) {
-			i = i -1
-			createTerrains(1){ [setxy(-20,i), setColor(brown()), type = 1] }
-		}
-		
-		
+		createTerrains(1){ [setxy(-5,-6), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-5,-5), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-5,-4), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-5,-3), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-5,-2), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-5,-1), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-5,0), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-5,1), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-5,2), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-5,3), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-5,4), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-5,5), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-5,6), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-5,7), setColor(brown()), t_type = 3, missionID = 0] }
+		createTerrains(1){ [setxy(-5,8), setColor(brown()), t_type = 3, missionID = 0] }
 		
 	}
 	
